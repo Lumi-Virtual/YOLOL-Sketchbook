@@ -1,137 +1,63 @@
 //////////////////////////////////////////////////////////////////////
 // Uni
+// 2.0.0
+// BSC1
 // 
-// Globals:
-//  :M1             - Message filter for transmitters
-//  :R1             - Signal Strength of transmitter
-//  :N1             - Message of transmitter
 // 
-//  :[X|Y|Z]        - The position of the core
 // 
-//  :ISAN           - Text display output field
+// External
+//  RA
+//  MA
+//  NA
+// 
+// Relay
+//  A
+//  MA
+//  NA
+// 
+// Internal
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// -
+//  XA
+//  XB
+//  XC
+//  XD
+//  XE
+//  YA
+//  YB
+//  YC
+//  YD
+//  YE
+// -
+//  ZA
+//  ZB
+//  ZC
+//  ZD
+//  ZE
+//  Q
+// 
+// Output
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
 // 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-t=999999 u=1000 z="station_" w=z+"hq_imperial_a" y=z+"proving_grounds"
-x=z+"hq_kingdom_a" z+="capital_imperial_a" :M1=w     //ISAN 2.0:Uni_0a
-a=39665.376 b=-a c=-t*t*t d=c e=22.057 j=214589.611 k=-68626.152
-l=100891.412 m=d n=23012.886 o=-2820.507 p=-4787.428 q=-16480.662
-r= 1602.298 s=-216741.039 f=t-:R1 f*=f :M1=x          //THE COLLECTIVE
-:M1=y g=t-:R1 g*=g vx++ vx/=(vx<3)/(:N1!=x) :M1=x goto7
-:M1=z h=t-:R1 h*=h vy++ vy/=(vy<3)/(:N1!=y) :M1=y goto8
-:M1=w i=t-:R1 i*=i vz++ vz/=(vz<3)/(:N1!=z) :M1=z goto9
-:X=f/a+g/b+h/c+i/d-e :Y=f/j+g/k+h/l+i/m-n :Z=f/o+g/p+h/q+i/r-s
-:ISAN="\nX:"+(:X/u*u)+"\nY:"+(:Y/u*u)+"\nZ:"+(:Z/u*u) goto5
-
-
-
-
-xt="\nX:"
-yt="\nY:"
-zt="\nZ:"
-
-xx
-yy
-zz
-
-f=t-:R1 f*=f :M1=x :X=f/a+g/b+h/c+i/d-e :X=xl*() xl=:X xt++ xt*=()
-g=t-:R1 g*=g :M1=y :Y=f/j+g/k+h/l+i/m-n :Y=yl*() yl=:Y yt++
-h=t-:R1 h*=h :M1=z :Z=f/o+g/p+h/q+i/r-s :Z=zl*() zl=:Z zt++
-i=t-:R1 i*=i :M1=w :ISAN=#+(:X/u*u)+#+(:Y/u*u)+#+(:Z/u*u) goto6
-
-
-f=t-:R1 f*=f :M1=x f/a f/j f/o :X=+++-e
-g=t-:R1 g*=g :M1=y g/b g/k g/p :Y=+++-n
-h=t-:R1 h*=h :M1=z h/c h/l h/q :Z=+++-s
-i=t-:R1 i*=i :M1=w i/d i/m i/r :ISAN=#+(:X/u*u)+#+(:Y/u*u)+#+(:Z/u*u) goto6
-
-
-
-f=t-:R                   fl=f f*=f :M=x :X=f/a+g/b+h/c+i/d-xx e=:X/u*u
-g=t-:R                   gl=g g*=g :M=y :Y=f/j+g/k+h/l+i/m-yy n=:Y/u*u
-h=t-:R                   hl=h h*=h :M=z :Z=f/o+g/p+h/q+i/r-zz s=:Z/u*u
-i=t-:R                   il=i i*=i :M=w :ISAN=xt+e+yt+n+zt+s v++ goto6
-
-
-
-f=t-:R f*=f fi++            fl=f :M=x :X=f/a+g/b+h/c+i/d-e xx=:X/u*u
-g=t-:R g*=g                 gl=g :M=y :Y=f/j+g/k+h/l+i/m-n yy=:Y/u*u
-h=t-:R h*=h                 hl=h :M=z :Z=f/o+g/p+h/q+i/r-s zz=:Z/u*u
-i=t-:R i*=i                 il=i :M=w :ISAN=xt+xx+yt+yy+zt+zz goto6
-
-
-f+=(t-:R-f)*(:N==w) :M=x                :X=f/a+g/b+h/c+i/d-e xx=:X/u*u
-g+=(t-:R-g)*(:N==x) :M=y                :Y=f/j+g/k+h/l+i/m-n yy=:Y/u*u
-h+=(t-:R-h)*(:N==y) :M=z                :Z=f/o+g/p+h/q+i/r-s zz=:Z/u*u
-i+=(t-:R-i)*(:N==z) :M=w                :ISAN=xt+xx+yt+yy+zt+zz goto6
-
-f+=(t-:R-f)*(:N==w) :M=x                          XX=f/a+g/b+h/c+i/d-e
-g+=(t-:R-g)*(:N==x) :M=y                          YY=f/j+g/k+h/l+i/m-n
-h+=(t-:R-h)*(:N==y) :M=z                          ZZ=f/o+g/p+h/q+i/r-s
-i+=(t-:R-i)*(:N==z) :M=w                       :X=XX :Y=YY :Z=ZZ goto6
-
-
-lastRange newRange deltaRange deltaTime distanceCorrected
-
-deltaTime++ distanceCorrected=999999-lastRange+deltaRange*(deltaTime+offset_) newRange=:Range*(:ReceivedMessage==searchMessage) [SET_CALCS_HERE] 1/newRange deltaRange=(lastRange-newRange)/deltaTime lastRange=newRange deltaTime=0
-
-a++ b=c-d+e*(a+0) f=:R*(:N==g) x+=b/aa y+=b/bb z+=b/cc 1/f e=(d-f)/a d=f a=0
-
-:X=f/a+g/b+h/c+i/d-e :Y=f/j+g/k+h/l+i/m-n :Z=f/o+g/p+h/q+i/r-s goto6
-
-
+ee=:XA ff=:XB gg=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999 at=5 bt=5 ct=5
+z="station_" w=z+"hq_imperial_a" x=z+"hq_kingdom_a"
+y=z+"proving_grounds" z+="capital_imperial_a"
+:MA=x an=:NA!=w a=t-:A+((at+3)*ad+:A-e)*an ad=(e-:A)/at/an e=:A at=0
+:MA=y bn=:NA!=x b=t-:A+((bt+2)*bd+:A-f)*bn bd=(f-:A)/bt/bn f=:A bt=0
+:MA=z cn=:NA!=y c=t-:A+((ct+1)*cd+:A-g)*cn cd=(g-:A)/ct/cn g=:A ct=0
+XX=a/ee+b/ff+c/gg+d/h-i YY=a/j+b/k+c/l+d/m-n at+=5 bt+=5 ct+=5 u=:Q+5
+:I=:X :J=:Y :K=:Z :X=XX :Y=YY :Z=a/o+b/p+c/q+d/r-s :MA=w d=t-:A gotou
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-lastRange newRange deltaRange deltaTime distanceCorrected
-
-deltaTime++ distanceCorrected=deltaRange*deltaTime+999999-lastRange newRange=:Range*(:Range!=lastRange) [SET_CALCS_HERE] 1/newRange deltaRange=(lastRange-newRange)/deltaTime lastRange=newRange deltaTime=0
-
-a++ b=c-d+e*(a+0) f=:R*(:N==g) x+=b/aa y+=b/bb z+=b/cc 1/f e=(d-f)/a d=f a=0
-
-
-
-j++ a=k*j+t-l m=:R1*(:R1!=l) :X=a*a/e+b*b/f+c*c/g+d*d/h-i
-0/m n=(l-m)/j l=m
-
-
-at++ a=ar*at+t-al an=:R1*(:R1!=al) 0/an ar=(al-an)/at al=an at=0
-bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
-ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
-dt++ d=dr*dt+t-dl dn=:R1*(:R1!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
-
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-t=999999 u=1000 z="station_" w=z+"hq_imperial_a" y=z+"proving_grounds"
-x=z+"hq_kingdom_a" z+="capital_imperial_a" :M1=w     //ISAN 2.0:Uni_0a
-a=39665.376 b=-a c=-t*t*t d=c e=22.057 j=214589.611 k=-68626.152
-l=100891.412 m=d n=23012.886 o=-2820.507 p=-4787.428 q=-16480.662
-r= 1602.298 s=-216741.039 f=t-:R1 f*=f :M1=x          //THE COLLECTIVE
-:M1=y g=t-:R1 g*=g vx++ vx/=(vx<3)/(:N1!=x) :M1=x goto7
-:M1=z h=t-:R1 h*=h vy++ vy/=(vy<3)/(:N1!=y) :M1=y goto8
-:M1=w i=t-:R1 i*=i vz++ vz/=(vz<3)/(:N1!=z) :M1=z goto9
-:X=f/a+g/b+h/c+i/d-e :Y=f/j+g/k+h/l+i/m-n :Z=f/o+g/p+h/q+i/r-s
-:ISAN="\nX:"+(:X/u*u)+"\nY:"+(:Y/u*u)+"\nZ:"+(:Z/u*u) goto5
-
-
-:M1=x at++ a=ar*at+t-al an=:R1*(:R1!=al) 0/an ar=(al-an)/at al=an at=0
-:M1=y bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
-:M1=z ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
-:M1=w dt++ d=dr*dt+t-dl dn=:R1*(:R1!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
-V=f/a+g/b+h/c+i/d-e u=:Q+9
-:I=:X :J=:Y :K=:Z :X=V :Y=f/j+g/k+h/l+i/m-n :Z=f/o+g/p+h/q+i/r-s gotou
-
-
-
-deltaTime++ distanceCorrected=deltaRange*deltaTime+999999-lastRange newRange=:Range*(:Range!=lastRange) [SET_CALCS_HERE] 1/newRange deltaRange=(lastRange-newRange)/deltaTime lastRange=newRange deltaTime=0
-
-:M1=yy bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
-:M1=zz ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
-:M1=ww dt++ d=dr*dt+t-dl dn=:R1*(:R1!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
-V=a/e+b/f+c/g+d/h-i VV=a/j+b/k+c/l+d/m-n u=:Q+9
-:I=:X :J=:Y :K=:Z :X=V :Y=VV :Z=a/o+b/p+c/q+d/r-s :M1=xx a=t-:R1 gotou
-
-
-
-:M1=yy bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
-:M1=zz ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
-
-
-
-deltaTime++ distanceCorrected=deltaRange*deltaTime+999999-lastRange
+err

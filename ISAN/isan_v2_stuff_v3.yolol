@@ -308,6 +308,30 @@ a++ b=c-d+e*(a+0) f=:R*(:N==g) x+=b/aa y+=b/bb z+=b/cc 1/f e=(d-f)/a d=f a=0
 
 :X=f/a+g/b+h/c+i/d-e :Y=f/j+g/k+h/l+i/m-n :Z=f/o+g/p+h/q+i/r-s goto6
 
+
+
+
+
+:M1=yy bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
+:M1=zz ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
+:M1=ww dt++ d=dr*dt+t-dl dn=:R1*(:R1!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
+V=a/e+b/f+c/g+d/h-i VV=a/j+b/k+c/l+d/m-n u=:Q+9
+:I=:X :J=:Y :K=:Z :X=V :Y=VV :Z=a/o+b/p+c/q+d/r-s :M1=xx a=t-:R1 gotou
+
+
+
+:M1=yy bt++ b=br*bt+t-bl bn=:R1*(:R1!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
+:M1=zz ct++ c=cr*ct+t-cl cn=:R1*(:R1!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
+
+
+
+deltaTime++ distanceCorrected=deltaRange*deltaTime+999999-lastRange
+
+
+
+deltaTime++ rangeIsNew=:Range!=lastRange distanceCorrected=999999-:Range+((deltaTime+0)*deltaRange+:Range-lastRange)*rangeIsNew/rangeIsNew deltaRange=(lastRange-:Range)/deltaTime lastRange=:Range deltaTime=0
+
+
 // a
 // b
 // c
