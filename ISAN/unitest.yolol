@@ -1,0 +1,68 @@
+//////////////////////////////////////////////////////////////////////
+// Should display correct X Y Z ISAN coordinates on a text panel.
+// Should give correct positions even while moving.
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Navigation Reciever
+// SignalStrength => RA
+// TargetMessage  => MA
+// Message        => NA
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Memory Relay In
+// RA => A
+// MA => MA
+// NA => NA
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Memory Chips
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// -
+//  XA = 39665.376
+//  XB = -39665.376
+//  XC = -9223372036854775.808
+//  XD = -9223372036854775.808
+//  XE = 22.057
+//  YA = 214589.611
+//  YB = -68626.152
+//  YC = 100891.412
+//  YD = -9223372036854775.808
+//  YE = 23012.886
+// -
+//  ZA = -2820.507
+//  ZB = -4787.428
+//  ZC = -16480.662
+//  ZD = 1602.298
+//  ZE = -216741.039
+//  Q
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Basic Chip
+ee=:XA ff=:XB gg=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999 at=5 bt=5 ct=5
+z="station_" w=z+"hq_imperial_a" x=z+"hq_kingdom_a"
+y=z+"proving_grounds" z+="capital_imperial_a"
+:MA=x an=:NA!=w a=t-:A+((at+3)*ad+:A-e)*an ad=(e-:A)/at/an e=:A at=0
+:MA=y bn=:NA!=x b=t-:A+((bt+2)*bd+:A-f)*bn bd=(f-:A)/bt/bn f=:A bt=0
+:MA=z cn=:NA!=y c=t-:A+((ct+1)*cd+:A-g)*cn cd=(g-:A)/ct/cn g=:A ct=0
+XX=a/ee+b/ff+c/gg+d/h-i YY=a/j+b/k+c/l+d/m-n at+=5 bt+=5 ct+=5 u=:Q+5
+:I=:X :J=:Y :K=:Z :X=XX :Y=YY :Z=a/o+b/p+c/q+d/r-s :MA=w d=t-:A gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Memory Relay Out
+// X  => X
+// Y  => Y
+// Z  => Z
+// I  => I
+// J  => J
+// K  => K
+// MA => MA
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Text Panel
+// PanelValue => ISAN
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Basic Chip
+a=1000 b="\nX:" c="\nY:" d="\nZ:"
+:ISAN=b+(:X/a*a)+c+(:Y/a*a)+d+(:Z/a*a) goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
