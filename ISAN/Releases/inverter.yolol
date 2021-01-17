@@ -1,0 +1,19 @@
+A=:X1-:X2 z=:Y1-:Y2 u=:Z1-:Z2 r=:X1-:X3 e=:Y1-:Y3 goto 1+:rst
+t=:Z1-:Z3 h=:X1-:X4 i=:Y1-:Y4 C=:Z1-:Z4 da=A*e*C-A*t*i-z*r*C+z*t*h
+da+=u*r*i-u*e*h m=999999 m*=m*m A=-0.5 r=A h=r z=:Y2 u=:Z2 i=:Y4
+:XA=m C=:Z4 e=:Y3 t=:Z3 :XA=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YA=m z=:X2 e=:X3 i=:X4 :YA=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZA=m u=:Y2 t=:Y3 C=:Y4 :ZA=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZB=m z=:X1 u=:Y1 :ZB=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YB=m u=:Z1 t=:Z3 C=:Z4 :YB=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XB=m z=:Y1 e=:Y3 i=:Y4 :XB=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XC=m e=:Y2 t=:Z2 :XC=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YC=m z=:X1 e=:X2 i=:X4 :YC=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZC=m u=:Y1 t=:Y2 C=:Y4 :ZC=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZD=m i=:X3 C=:Y3 :ZD=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YD=m u=:Z1 t=:Z2 C=:Z3 :YD=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XD=m z=:Y1 e=:Y2 i=:Y3 :XD=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+P1=:X1*:X1+:Y1*:Y1+:Z1*:Z1 P2=:X2*:X2+:Y2*:Y2+:Z2*:Z2 P3=:X3*:X3
+P3+=:Y3*:Y3+:Z3*:Z3 P4=:X4*:X4+:Y4*:Y4+:Z4*:Z4        //THE COLLECTIVE
+:XE=P1/:XA+P2/:XB+P3/:XC+P4/:XD :YE=P1/:YA+P2/:YB+P3/:YC+P4/:YD
+:ZE=P1/:ZA+P2/:ZB+P3/:ZC+P4/:ZD :W=1 :rst=0     //ISAN 2.0:InvEng_2.3b

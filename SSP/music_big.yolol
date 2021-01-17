@@ -1,0 +1,101 @@
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+s=:Track0 a="c" b="C" c="d" d="D" e="e" goto 1+:Play
+n=:N :M=s---s :Cn=n==a :Cs=n==b :Dn=n==c :Ds=n==d :En=n==e
+n=:M :N=s---s :Cn=n==a :Cs=n==b :Dn=n==c :Ds=n==d :En=n==e goto2
+goto1
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="f" b="F" c="g" d="G" e="a" f="A" goto 1+:Play
+n=:N :Fn=n==a :Fs=n==b :Gn=n==c :Gs=n==d :An=n==e :As=n==f
+n=:M :Fn=n==a :Fs=n==b :Gn=n==c :Gs=n==d :An=n==e :As=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="b" b="h" c="B" d="H" e="E" f="i" goto 1+:Play
+n=:N :Bn=n==a :Cc=n==b :Db=n==c :Dh=n==d :De=n==e :Sa=n==f
+n=:M :Bn=n==a :Cc=n==b :Db=n==c :Dh=n==d :De=n==e :Sa=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="I" b="j" c="J" d="k" e="K" f="l" goto 1+:Play
+n=:N :Sb=n==a :Sc=n==b :Sd=n==c :Se=n==d :Sf=n==e :Sg=n==f
+n=:M :Sb=n==a :Sc=n==b :Sd=n==c :Se=n==d :Sf=n==e :Sg=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="L" b="m" c="M" d="n" e="N" f="o" goto 1+:Play
+n=:N :Sh=n==a :Si=n==b :Sj=n==c :Sk=n==d :Sl=n==e :Sm=n==f
+n=:M :Sh=n==a :Si=n==b :Sj=n==c :Sk=n==d :Sl=n==e :Sm=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="O" b="p" c="P" d="q" e="Q" f="r" goto 1+:Play
+n=:N :Sn=n==a :So=n==b :Sp=n==c :Sq=n==d :Sr=n==e :Ss=n==f
+n=:M :Sn=n==a :So=n==b :Sp=n==c :Sq=n==d :Sr=n==e :Ss=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="R" b="s" c="S" d="t" e="T" f="u" goto 1+:Play
+n=:N :St=n==a :Su=n==b :Sv=n==c :Sw=n==d :Va=n==e :Vb=n==f
+n=:M :St=n==a :Su=n==b :Sv=n==c :Sw=n==d :Va=n==e :Vb=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="U" b="v" c="V" d="w" e="W" f="x" goto 1+:Play
+n=:N :Vc=n==a :Vd=n==b :Ve=n==c :Vf=n==d :Vg=n==e :Vh=n==f
+n=:M :Vc=n==a :Vd=n==b :Ve=n==c :Vf=n==d :Vg=n==e :Vh=n==f goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="X" b="y" c="Y" d="z" e="Z" goto 1+:Play
+n=:N :Vi=n==a :Vj=n==b :Vk=n==c :Vl=n==d :Mw=n==e
+n=:M :Vi=n==a :Vj=n==b :Vk=n==c :Vl=n==d :Mw=n==e goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+// Notes
+Cn c   // C Natural 5
+Cs C   // C Sharp 5
+Dn d   // D Natural 5
+Ds D   // D Sharp 5
+En e   // E Natural 5
+Fn f   // F Natural 5
+Fs F   // F Sharp 5
+Gn g   // G Natural 5
+Gs G   // G Sharp 5
+An a   // A Natural 5
+As A   // A Sharp 5
+Bn b   // B Natural 5
+Cc h   // C Natural 6
+
+// Drums
+Db B   // Base Drum
+Ds H   // Snare Drum
+Dt E   // Tom Drum
+
+// Sound effects
+Sa i
+Sb I
+Sc j
+Sd J
+Se k
+Sf K
+Sg l
+Sh L
+Si m
+Sj M
+Sk n
+Sl N
+Sm o
+Sn O
+So p
+Sp P
+Sq q
+Sr Q
+Ss r
+St R
+Su s
+Sv S
+Sw t
+
+// Endo voice
+Va T
+Vb u
+Vc U
+Vd v
+Ve V
+Vf w
+Vg W
+Vh x
+Vi X
+Vj y
+Vk Y
+Vl z
+
+// Meow
+Mw Z

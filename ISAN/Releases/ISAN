@@ -1,0 +1,85 @@
+// THE COLLECTIVE
+// ISAN AAA 0.0.0
+//////////////////////////////////////////////////////////////////////
+// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+// A B C D       H I J K         P q R S         X Y Z
+// 
+// External
+//  RA
+//  RB
+//  RC
+//  RD
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Relay
+//  A
+//  B
+//  C
+//  D
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Internal
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+//  S
+//  P
+//  H
+//  R
+// -
+//  XA
+//  XB
+//  XC
+//  XD
+//  XE
+//  YA
+//  YB
+//  YC
+//  YD
+//  YE
+// -
+//  ZA
+//  ZB
+//  ZC
+//  ZD
+//  ZE
+//  Q
+//  DP
+//  DH
+// 
+// Output
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+//  S
+//  P
+//  H
+//  R
+// -
+//  DP
+//  DH
+//  FF
+//  FP
+//  FY

@@ -1,0 +1,31 @@
+// gen script
+:genFuelRate=1000-:bat/10 goto 1
+
+// 13x7 display
+
+:Fuel=FuelChamberFuel/FuelChamberMaxFuel*100 // percentage
+:Prop=GasNetworkStoredResource/GasNetworkMaxResource*100 // percentage
+:fueltime=FuelChamberMaxFuel/GeneratorUnitRate // this is convinently just seconds // actually make this a continuous average
+:proptime=
+
+
+
+
+:Info=
+// lots of stuff
+
+
+
+
+
+
+// isan
+
+// fuel left
+// fuel time
+// prop left
+// prop time
+
+// missing parts ?
+
+// connected stations

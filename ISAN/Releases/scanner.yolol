@@ -1,0 +1,42 @@
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+// MAYbe works
+// 
+// "ISAN:XXXXXXX:YYYY:ZZZZZZ"
+// 
+f=1425247000000000 s="13579" i=-1 v=-1 u=-3 :X1=0 :Y1=0 :Z1=0 :X2=0
+:Y2=0 :Z2=0 :X3=0 :Y3=0 :Z3=0 :X4=0 :Y4=0 :Z4=0 goto6
+r=:R0 m=:M0 :F0++ j++ j/=(:M0==k) k=:M0 :F0=f+i goto 3+3*(j>5)
+d=c/(r>q) q=p/(r>q) d=m*(r<p) q=r*(r<p) c=b/(r>p) p=o/(r>p) c=m*(r<o)
+b=a/(r>o) p=r*(r<o) o=l/(r>o) b=m*(r<l) o=r*(r<l) a=m/(r>l) l=r/(r>l)
+i++ :F0=f+i k=:M0 goto 3/(i<=9)
+v++ n=0 u=-3 t=d*(v<1) t=c*(v==3) t=b*(v==6) t=a*(v==9) goto 1/(v>11)
+d=t---t u/(d>9) n+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*10^u++ goto8
+:X1+=n*(v<1) :Y1+=n*(v==1) :Z1+=n*(v==2) :X2+=n*(v==3) :Y2+=n*(v==4)
+:Z2+=n*(v==5) :X3+=n*(v==6) :Y3+=n*(v==7) :Z3+=n*(v==8) :X4+=n*(v==9)
+:Y4+=n*(v==10) :Z4+=n*(v>10) :M1=a :M2=b :M3=c :M4=d goto7
+// 
+// check if coplanar
+// check if the message is an ISAN lighthouse, if not use coords from a database
+
+// a
+// b
+// c
+// d
+// 
+// f
+// 
+// 
+// i
+// j
+// k
+// l
+// m
+// n
+// o
+// p
+// q
+// r
+// s
+// t
+// u
+// v

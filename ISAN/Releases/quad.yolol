@@ -1,0 +1,90 @@
+//////////////////////////////////////////////////////////////////////
+// Quad
+// 2.0.0
+// BSC1
+// 
+// 
+// 
+// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+// A B C D       H I J K         P q R S         X Y Z
+// 
+// External
+//  RA
+//  RB
+//  RC
+//  RD
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Relay
+//  A
+//  B
+//  C
+//  D
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Internal
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// -
+//  XA
+//  XB
+//  XC
+//  XD
+//  XE
+//  YA
+//  YB
+//  YC
+//  YD
+//  YE
+// -
+//  ZA
+//  ZB
+//  ZC
+//  ZD
+//  ZE
+//  Q
+// 
+// Output
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=:Q
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=3
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+//--+----| Ignore unless you know what you're doing.
+t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
+k=-68626.152 l=100891.412 m=h n=23012.886 o=-2820.507 p=-4787.428
+q=-16480.662 r= 1602.298 s=-216741.039
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+err

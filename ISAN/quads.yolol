@@ -1,0 +1,127 @@
+//////////////////////////////////////////////////////////////////////
+// Quad - Bound Fast
+// BSC3
+// DON'T USE - no IJK, bad var names
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 a=39665.376 b=-a c=-m*m*m d=c e=22.057
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :X=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 a=214589.611 b=-68626.152 c=100891.412 d=-m*m*m e=23012.886
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Y=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 a=-2820.507 b=-4787.428 c=-16480.662 d=1602.298 e=-216741.039
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Z=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+//////////////////////////////////////////////////////////////////////
+// Quad - Bound Small
+// ADV1
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
+k=-68626.152 l=100891.412 m=d n=23012.886 o=-2820.507 p=-4787.428
+q=-16480.662 r= 1602.298 s=-216741.039
+a=(t-:R1)^2 b=(t-:R2)^2 c=(t-:R3)^2 d=(t-:R4)^2 X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s goto4
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+//////////////////////////////////////////////////////////////////////
+// Quad - Unbound Fast
+// BSC3
+// 
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e=:XA f=:XB g=:XC h=:XD i=:XE t=999999
+a=t-:R1 b=t-:R2 c=t-:R3 d=t-:R4 :X=a*a/e+b*b/f+c*c/g+d*d/h-i goto 2+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e=:XA f=:XB g=:XC h=:XD i=:XE t=999999
+j=a k=b l=c m=d a=t-:R1+a-j b=t-:R2 c=t-:R3 d=t-:R4n
+:I=:X :X=a*a/e+b*b/f+c*c/g+d*d/h-i o++ p++ q++ r++ goto 2+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+//////////////////////////////////////////////////////////////////////
+// Quad - Unbound Small
+// BSC1
+// 
+// 
+// ext   R1 R2 R3 R4  M1 M2 M3 M4  N1
+// map   A  B  C  D
+// int   XA XB XC XD YA YB YC YD ZA ZB ZC ZD W
+// out   X Y Z I J K  S  P H R  DP DH
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE 
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=:W
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=3
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:R1 b=t-:R2 c=t-:R3 d=t-:R4 a*=a b*=b c*=c d*=d 
+X=a/e+b/f+c/g+d/h-i Y=d/m-n
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+Y :Z=a/o+b/p+c/q+d/r-s goto3+:W
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
+
+
+
+
+t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
+k=-68626.152 l=100891.412 m=h n=23012.886 o=-2820.507 p=-4787.428
+q=-16480.662 r= 1602.298 s=-216741.039
+
+
+
+
+
+
+
+
+
+
+(a*d+c*b)/b*d
+(a*d*f+b*c*f+b*d*e)/d*b*f-s
+
+
+
+
+
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
+o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:R1 b=t-:R2 c=t-:R3 d=t-:R4 a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h
+:I=:X :J=:Y :K=:Z :X=X-i :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s
+goto3+:W
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+lastRange newRange deltaRange deltaTime distanceCorrected
+
+deltaTime++ distanceCorrected=deltaRange*deltaTime+999999-lastRange newRange=:Range*(:Range!=lastRange) [SET_CALCS_HERE] 1/newRange deltaRange=(lastRange-newRange)/deltaTime lastRange=newRange deltaTime=0
+
+a++ b=c-d+e*(a+0) f=:R*(:N==g) x+=b/aa y+=b/bb z+=b/cc 1/f e=(d-f)/a d=f a=0
+
+
+
+j++ a=k*j+t-l m=:R1*(:R1!=l) :X=a*a/e+b*b/f+c*c/g+d*d/h-i
+0/m n=(l-m)/j l=m
+
+
+at++ a=ar*at+t-al an=:R1*(:R1!=al) 0/an ar=(al-an)/at al=an at=0
+bt++ b=br*bt+t-bl bn=:R2*(:R2!=bl) 0/bn br=(bl-bn)/bt bl=bn bt=0
+ct++ c=cr*ct+t-cl cn=:R3*(:R3!=cl) 0/cn cr=(cl-cn)/ct cl=cn ct=0
+dt++ d=dr*dt+t-dl dn=:R4*(:R4!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+a=:R1 b=:R2 c=:R3 d=:R4 e++ 
+

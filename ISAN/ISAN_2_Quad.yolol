@@ -1,0 +1,61 @@
+//////////////////////////////////////////////////////////////////////
+// Quad
+// 
+// Globals:
+//  :setup          - Setup script halt ctrl (Set==1 to start system)
+//  :M[1-4]         - Message filter for transmitter [1-4]
+//  :R[1-4]         - Signal Strength of transmitter [1-4]
+//  :[X|Y|Z][1-4]   - Position of transmitter [1-4]
+//
+//  :rst=1          - Inversion engine halt ctrl (handled by setup)
+//  :[X|Y|Z][A-D]   - Axis scale constants
+//  :[X|Y|Z]E       - Axis offset constants
+//
+//  :[X|Y|Z]        - The position of the core
+//
+//  :ISAN          - Text display output field
+//  :W              - 0 = Continue looping position. 1 = Grab new special numbers
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m="station_" goto 1+:setup
+:M1=m+"hq_imperial_a"      :X1=-9938.401 :Y1=  4904.714 :Z1=0
+:M2=m+"hq_kingdom_a"       :X2= 9894.287 :Y2=  4904.714 :Z2=0
+:M3=m+"proving_grounds"    :X3=19218.818 :Y3=-45540.987 :Z3=0
+:M4=m+"capital_imperial_a" :X4= -465.876 :Y4=     0.236 :Z4=-801.149
+:rst=1 :setup=0 //ISAN 2.0:Temp_Setup_2.4b              THE COLLECTIVE
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+A=:X1-:X2 z=:Y1-:Y2 u=:Z1-:Z2 r=:X1-:X3 e=:Y1-:Y3 goto 1+:rst
+t=:Z1-:Z3 h=:X1-:X4 i=:Y1-:Y4 C=:Z1-:Z4 da=A*e*C-A*t*i-z*r*C+z*t*h
+da+=u*r*i-u*e*h m=9223372036854775.80 A=-0.5 r=A h=r z=:Y2 u=:Z2 i=:Y4
+:XA=m C=:Z4 e=:Y3 t=:Z3 :XA=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YA=m z=:X2 e=:X3 i=:X4 :YA=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZA=m u=:Y2 t=:Y3 C=:Y4 :ZA=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZB=m z=:X1 u=:Y1 :ZB=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YB=m u=:Z1 t=:Z3 C=:Z4 :YB=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XB=m z=:Y1 e=:Y3 i=:Y4 :XB=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XC=m e=:Y2 t=:Z2 :XC=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YC=m z=:X1 e=:X2 i=:X4 :YC=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZC=m u=:Y1 t=:Y2 C=:Y4 :ZC=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:ZD=m i=:X3 C=:Y3 :ZD=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:YD=m u=:Z1 t=:Z2 C=:Z3 :YD=da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+:XD=m z=:Y1 e=:Y2 i=:Y3 :XD=-da/(A*e*C-A*t*i-z*r*C+z*t*h+u*r*i-u*e*h)
+P1=:X1*:X1+:Y1*:Y1+:Z1*:Z1 P2=:X2*:X2+:Y2*:Y2+:Z2*:Z2 P3=:X3*:X3
+P3+=:Y3*:Y3+:Z3*:Z3 P4=:X4*:X4+:Y4*:Y4+:Z4*:Z4        //THE COLLECTIVE
+:XE=P1/:XA+P2/:XB+P3/:XC+P4/:XD :YE=P1/:YA+P2/:YB+P3/:YC+P4/:YD
+:ZE=P1/:ZA+P2/:ZB+P3/:ZC+P4/:ZD :W=1 :rst=0     //ISAN 2.0:InvEng_2.3b
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 goto3 //ISAN 2.0:AxP_X_2.2b
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :X=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+a=:XA b=:XB c=:XC d=:XD e=:XE :W=0 goto2              //THE COLLECTIVE
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 goto3 //ISAN 2.0:AxP_X_2.2b
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Y=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+a=:YA b=:YB c=:YC d=:YD e=:YE :W=0 goto2              //THE COLLECTIVE
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+m=999999 goto3 //ISAN 2.0:AxP_X_2.2b
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Z=f*f/a+g*g/b+h*h/c+i*i/d-e goto 2+:W
+a=:ZA b=:ZB c=:ZC d=:ZD e=:ZE :W=0 goto2              //THE COLLECTIVE
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="\nX:" b="\nY:" c="\nZ:" d=1000 //ISAN 2.0:Test display driver
+:ISAN=a+(:X/d*d)+b+(:Y/d*d)+c+(:Z/d*d) goto2         //THE COLLECTIVE
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|

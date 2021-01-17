@@ -1,0 +1,25 @@
+//////////////////////////////////////////////////////////////////////
+// Quad-Limited
+// 
+// Globals:
+//  :M[1-4]         - Message filter for transmitter [1-4]
+//  :R[1-4]         - Signal Strength of transmitter [1-4]
+//
+//  :[X|Y|Z]        - The position of the core
+//
+//  :ISAN           - Text display output field
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a=39665.376 b=-a e=22.057 m=999999 n="station_hq_" :M1=n+"imperial_a"
+c=-m*m*m d=c :M2=n+"kingdom_a" //ISAN 2.0:AxP_X_2.2b    THE COLLECTIVE
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :X=f*f/a+g*g/b+h*h/c+i*i/d-e goto3
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a=214589.611 b=-68626.152 c=100891.412 m=999999 c=-m*m*m e=23012.886
+:M3="station_proving_grounds" //ISAN 2.0:AxP_X_2.2b     THE COLLECTIVE
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Y=f*f/a+g*g/b+h*h/c+i*i/d-e goto3
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a=-2820.507 b=-4787.428 c=-16480.662 d=1602.298 e=-216741.039 m=999999
+:M4="station_capital_imperial_a" //ISAN 2.0:AxP_X_2.2b  THE COLLECTIVE
+f=m-:R1 g=m-:R2 h=m-:R3 i=m-:R4 :Z=f*f/a+g*g/b+h*h/c+i*i/d-e goto3
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+err

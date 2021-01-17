@@ -1,0 +1,132 @@
+//////////////////////////////////////////////////////////////////////
+// String Sound Player
+// 1.0.0
+// 
+// Plays string sound chips.
+// 
+// Requires one 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// 
+// Notes
+//  c 80   C Natural 5
+//  C 81   C Sharp 5
+//  d 82   D Natural 5
+//  D 83   D Sharp 5
+//  e 84   E Natural 5
+//  f 85   F Natural 5
+//  F 86   F Sharp 5
+//  g 87   G Natural 5
+//  G 88   G Sharp 5
+//  a 89   A Natural 5
+//  A 90   A Sharp 5
+//  b 91   B Natural 5
+//  h 92   C Natural 6
+// 
+// Drums
+//  B 70   Base Drum
+//  H 71   Snare Drum
+//  E 72   Tom Drum
+// 
+// Sound effects
+//  i 0
+//  I 1
+//  j 2
+//  J 3
+//  k 4
+//  K 5
+//  l 6
+//  L 7
+//  m 8
+//  M 9
+//  n 10
+//  N 11
+//  o 12
+//  O 13
+//  p 14
+//  P 15
+//  q 16
+//  Q 17
+//  r 18
+//  R 19
+//  s 20
+//  S 21
+//  t 22
+// 
+// Endo voice
+//  T 50
+//  u 51
+//  U 52
+//  v 53
+//  V 54
+//  w 55
+//  W 56
+//  x 57
+//  X 58
+//  y 59
+//  Y 60
+//  z 61
+// 
+// Meow
+//  Z 99
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+s=:ATrack a="c" b=81 c="C" d=82 e="d" f=83 goto 1+:Play
+n=:Z :Y=s---s :A=-1 :B+=b*n==a :B+=d*n==c :B+=f*n==e :BP=:B
+n=:Y :Z=s---s :B=-1 :A+=b*n==a :A+=d*n==c :A+=f*n==e :AP=:A goto2
+goto1
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="e" b=84 c="f" d=85 e="F" f=86 g="g" h=87 i="G" j=88 goto 1+:Play
+n=:Z :B+=b*n==a :B+=d*n==c :B+=f*n==e :B+=h*n==g :BP=:B
+:A+=b*:Y==a :A+=d*:Y==c :A+=f*:Y==e :A+=f*:Y==e :A+=f*:Y==e :AP=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="a" b=89 c="A" d=90 e="b" f=91 g="h" h=92 i="B" j=70 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="H" b=71 c="E" d=72 e="i" f=0 g="I" h=1 i="j" j=2 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="J" b=3 c="k" d=4 e="K" f=5 g="l" h=6 i="L" j=7 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="m" b=8 c="M" d=9 e="n" f=10 g="N" h=11 i="o" j=12 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="O" b=13 c="p" d=14 e="P" f=15 g="q" h=16 i="Q" j=17 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="r" b=18 c="R" d=19 e="s" f=20 g="S" h=21 i="t" j=22 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="T" b=50 c="u" d=51 e="U" f=52 g="v" h=53 i="V" j=54 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="w" b=55 c="W" d=56 e="x" f=57 g="X" h=58 i="y" j=59 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=h*n==g :A+=j*n==i :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :A+=f*n==e :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="Y" b=60 c="z" d=61 e="Z" f=99 goto 1+:Play
+n=:Z :A+=b*n==a :A+=d*n==c :A+=f*n==e :AA=:A
+n=:Y :A+=b*n==a :A+=d*n==c :A+=f*n==e :AA=:A goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
