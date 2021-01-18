@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 // String Sound Player
-// 1.0.1
+// 1.0.2
 // BSC1-10
 // 
 // Plays string sound chips.
@@ -12,12 +12,12 @@
 //  SoundType -> AB
 // 
 // Requries these external memory fields:
-//  ATrack   // Your string track goes here.
-//  Ply      // 3 = Play. 1 = Reset.
-//  A
-//  B
-//  AS
-//  BS
+//  :ATrack   // Your string track goes here.
+//  :Ply      // 3 = Play. 1 = Reset.
+//  :A
+//  :B
+//  :AS
+//  :BS
 // 
 // 
 // 
