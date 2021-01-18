@@ -14,7 +14,10 @@
 //  MC
 //  MD
 //  NA
+//  NB ?
 // -
+//  NC ?
+//  ND ?
 //  DX
 //  DY
 //  DZ
@@ -83,3 +86,32 @@
 //  FF
 //  FP
 //  FY
+
+
+
+:A // -  First signal strength
+:B // -  Second signal strength
+:C // -  Third signal strength
+:D // -  Fourth signal strength
+e
+f
+g
+:H // *  Heading (Yaw)
+:I // *  Last X
+:J // *  Last Y
+:K // *  Last Z
+l
+m
+n
+o
+:P // *  Pitch
+:Q // -  First signal recieved message
+:R // *  Roll
+:S // *  Speed
+:T // -  First signal target 
+:U // -  Second signal target
+:V // -  Third signal target 
+:W // -  Fourth signal target
+:X // *  X
+:Y // *  Y
+:Z // *  Z

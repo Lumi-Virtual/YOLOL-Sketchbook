@@ -50,10 +50,10 @@
 //  K
 // 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-ee=:XA ff=:XB gg=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE
-o=:ZA p=:ZB q=:ZC r=:ZD s=:ZE t=999999 at=5 bt=5 ct=5
 z="station_" w=z+"hq_imperial_a" x=z+"hq_kingdom_a"
 y=z+"proving_grounds" z+="capital_imperial_a"
+ee=:XA ff=:XB gg=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE o=:ZA
+p=:ZB q=:ZC r=:ZD s=:ZE t=999999 at=5 bt=5 ct=5 :Q=0
 :MA=x an=:NA!=w a=t-:A+((at+3)*ad+:A-e)*an ad=(e-:A)/at/an e=:A at=0
 :MA=y bn=:NA!=x b=t-:A+((bt+2)*bd+:A-f)*bn bd=(f-:A)/bt/bn f=:A bt=0
 :MA=z cn=:NA!=y c=t-:A+((ct+1)*cd+:A-g)*cn cd=(g-:A)/ct/cn g=:A ct=0

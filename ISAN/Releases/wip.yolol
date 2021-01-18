@@ -1,0 +1,186 @@
+:A // -  First signal strength
+:B // -  Second signal strength
+:C // -  Third signal strength
+:D // -  Fourth signal strength
+:E // *  Magic number storage?
+f
+g
+:H // *  Heading (Yaw)
+:I // *  Last X
+:J // *  Last Y
+:K // *  Last Z
+:L // -  First signal recieved message
+:M // -  Second signal recieved message
+:N // -  Third signal recieved message
+:O // -  Fourth signal recieved message
+:P // *  Pitch
+:Q // *  Re-aquire magic numberes &? magic number storage
+:R // *  Roll
+:S // *  Speed
+:T // -  First signal target
+:U // -  Second signal target
+:V // -  Third signal target
+:W // -  Fourth signal target
+:X // *  X
+:Y // *  Y
+:Z // *  Z
+
+// Magic Numbers
+:XA // * 
+:XB // * 
+:XC // * 
+:XD // * 
+:XE // * 
+:YA // * 
+:YB // * 
+:YC // * 
+:YD // * 
+:YE // * 
+:ZA // * 
+:ZB // * 
+:ZC // * 
+:ZD // * 
+:ZE // * 
+
+:ISAN // Text Panel
+
+
+X Y Z I J K Q? E? (8 6?)
+S P H R DX DY DZ (7)
+
+
+
+
+
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+v="station_" :MA=v+"hq_imperial_a" :MB=v+"hq_kingdom_a"
+:MC=v+"proving_grounds" :MD=v+"capital_imperial_a"
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE o=:ZA :Q=0
+p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=a<t
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s w=b<t
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=w
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s w=c<t
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=w
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s w=d<t
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=w
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=u>3
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u*=99
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=5
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+//--|
+u=a<t
+u*=4
+u+=5
+gotou
+
+a-- a-- a-- a-- a-- a-- a-- a-- a-- a-- a-- a-- a-- a-- goto9/(a!="~")
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+d=t t-- d=d-t/(d>9) n+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*10^u u++ goto8
+
+d=t---t
+
+:Q 
+
+
+
+
+
+
+
+
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+f=1425247000000000 s="13579" i=-1 v=-1 u=-3 :X1=0 :Y1=0 :Z1=0 :X2=0
+:Y2=0 :Z2=0 :X3=0 :Y3=0 :Z3=0 :X4=0 :Y4=0 :Z4=0 goto6
+r=:R0 m=:M0 :F0++ j++ j/=(:M0==k) k=:M0 :F0=f+i goto 3+3*(j>5)
+d=c/(r>q) q=p/(r>q) d=m*(r<p) q=r*(r<p) c=b/(r>p) p=o/(r>p) c=m*(r<o)
+b=a/(r>o) p=r*(r<o) o=l/(r>o) b=m*(r<l) o=r*(r<l) a=m/(r>l) l=r/(r>l)
+i++ :F0=f+i k=:M0 goto 3/(i<=9)
+v++ n=0 u=-3 t=d*(v<1) t=c*(v==3) t=b*(v==6) t=a*(v==9) goto 1/(v>11)
+d=t---t u/(d>9) n+=(2*((d>1)+(d>3)+(d>5)+(d>7))+(s<s-d))*10^u++ goto8
+:X1+=n*(v<1) :Y1+=n*(v==1) :Z1+=n*(v==2) :X2+=n*(v==3) :Y2+=n*(v==4)
+:Z2+=n*(v==5) :X3+=n*(v==6) :Y3+=n*(v==7) :Z3+=n*(v==8) :X4+=n*(v==9)
+:Y4+=n*(v==10) :Z4+=n*(v>10) :M1=a :M2=b :M3=c :M4=d goto7
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+:A // -  First signal strength
+:B // -  Second signal strength
+:C // -  Third signal strength
+:D // -  Fourth signal strength
+e
+f
+g
+:H // *  Heading (Yaw)
+:I // *  Last X
+:J // *  Last Y
+:K // *  Last Z
+l
+m
+n
+o
+:P // *  Pitch
+:Q // -  First signal recieved message
+:R // *  Roll
+:S // *  Speed
+:T // -  First signal target
+:U // -  Second signal target
+:V // -  Third signal target
+:W // -  Fourth signal target
+:X // *  X
+:Y // *  Y
+:Z // *  Z
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+// A Reciever Target Message
+"station_hq_imperial_a"
+// B Reciever Target Message
+"station_hq_kingdom_a"
+// C Reciever Target Message
+"station_proving_grounds"
+// D Reciever Target Message
+"station_capital_imperial_a"
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+t=999999 v=142524700000000 goto18
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d
+X=a/e+b/f+c/g+d/h-i Y=a/j+b/k+c/l+d/m-n Z=a/o+b/p
+:I=:X :J=:Y :K=:Z :X=X :Y=Y :Z=Z+c/q+d/r-s goto2/((a<t+b<t+c<t+d<t)>3)
+a=v+100 :T=v b=0 c=:Q d=0 e=0 f=0 g=0 h=0 i=0 j=0 k=0 l=0 m=0 n=0 o=0
+b++ :T=:T+(d-:T)*(1-:T<a) b/=(b<4)/(:Q==c)/(:T<a) c=:Q goto6
+d=d+(:T-d)*(:A<t) t=d/(:T<a) b=0 :T++ goto6
+:U=v :V=v :W=v a=:Q d="13579:" p=0 q=0 r=0 s=0 t=0 u=0
+b=a c=b-a-- t=t*10+(2*(c>1+c>3+c>5+c>7)+d<(d-c))/1000/(1-c<0) goto9
+t=t-2*t*(c=="-") e+=t*(u==3) f+=t*(u==4) g+=t*(u==5) h+=t*(u==6)
+:U+=t*(u==0) :V+=t*(u==1) :W=+=t*(u==2) i+=t*(u==7) j+=t*(u==8)
+k+=t*(u==9) l+=t*(u==10) m+=t*(u==11) n+=t*(u==12) o+=t*(u==13) u++
+p+=t*(u==15) q+=t*(u==16) r+=t*(u==17) s+=t*(u==18) t=0 goto9-(u>17)*8
+
+
+// Remove the section below, and the goto18 on line 1 when player
+// transmitters work.
+t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
+k=-68626.152 l=100891.412 m=g n=23012.886 o=-2820.507 p=-4787.428
+q=-16480.662 r=1602.298 s=-216741.039 goto2
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|

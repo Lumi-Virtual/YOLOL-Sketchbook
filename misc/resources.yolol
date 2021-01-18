@@ -29,3 +29,13 @@
 // missing parts ?
 
 // connected stations
+
+
+// string to number (reads backwards) interperats anything lower than
+// "0" in ascii as a number seperator, if the seperator is "-" then
+// it makes the number it just processed negative
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+s=:String k="13579:" b=10 p=1000 n=0
+z=s c=z-s-- n=n*b+(2*(c>1+c>3+c>5+c>7)+k<(k-c))/p/(1-c<0) goto2
+n=n-2*n*(c=="-") :Out=n n=0 goto2-(z=="")
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|

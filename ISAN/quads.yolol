@@ -125,3 +125,92 @@ dt++ d=dr*dt+t-dl dn=:R4*(:R4!=dl) 0/dn dr=(dl-dn)/dt dl=dn dt=0
 
 a=:R1 b=:R2 c=:R3 d=:R4 e++ 
 
+
+
+//////////////////////////////////////////////////////////////////////
+// Quad
+// 2.0.0
+// BSC1
+// 
+// 
+// 
+// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+// A B C D       H I J K         P q R S         X Y Z
+// 
+// External
+//  RA
+//  RB
+//  RC
+//  RD
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Relay
+//  A
+//  B
+//  C
+//  D
+//  MA
+//  MB
+//  MC
+//  MD
+//  NA
+// -
+//  DX
+//  DY
+//  DZ
+// 
+// Internal
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// -
+//  XA
+//  XB
+//  XC
+//  XD
+//  XE
+//  YA
+//  YB
+//  YC
+//  YD
+//  YE
+// -
+//  ZA
+//  ZB
+//  ZC
+//  ZD
+//  ZE
+//  Q
+// 
+// Output
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+v="station_" :MA=v+"hq_imperial_a" :MB=v+"hq_kingdom_a"
+:MC=v+"proving_grounds" :MD=v+"capital_imperial_a"
+e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE o=:ZA :Q=0
+p=:ZB q=:ZC r=:ZD s=:ZE t=999999
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=:Q
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=5
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
+:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+err

@@ -2,86 +2,64 @@
 // Quad
 // 2.0.0
 // BSC1
+//
 // 
 // 
-// 
-// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-// A B C D       H I J K         P q R S         X Y Z
+// A Reciever Target Message
+// "station_hq_imperial_a"
+// B Reciever Target Message
+// "station_hq_kingdom_a"
+// C Reciever Target Message
+// "station_proving_grounds"
+// D Reciever Target Message
+// "station_capital_imperial_a"
 // 
 // External
-//  RA
-//  RB
-//  RC
-//  RD
-//  MA
-//  MB
-//  MC
-//  MD
-//  NA
-// -
-//  DX
-//  DY
-//  DZ
-// 
-// Relay
-//  A
-//  B
-//  C
-//  D
-//  MA
-//  MB
-//  MC
-//  MD
-//  NA
-// -
-//  DX
-//  DY
-//  DZ
+//  A   First signal strength
+//  B   Second signal strength
+//  C   Third signal strength
+//  D   Fourth signal strength
+//  Q   First signal recieved message
+//  T   First signal target
+//  U   Second signal target
+//  V   Third signal target
+//  W   Fourth signal target
 // 
 // Internal
-//  X
-//  Y
-//  Z
-//  I
-//  J
-//  K
-// -
-//  XA
-//  XB
-//  XC
-//  XD
-//  XE
-//  YA
-//  YB
-//  YC
-//  YD
-//  YE
-// -
-//  ZA
-//  ZB
-//  ZC
-//  ZD
-//  ZE
-//  Q
+//  X   X coordinate
+//  Y   Y coordinate
+//  Z   Z coordinate
+//  I   Last X coordinate
+//  J   Last Y coordinate
+//  K   Last Z coordinate
 // 
 // Output
-//  X
-//  Y
-//  Z
-//  I
-//  J
-//  K
+//  X   X coordinate
+//  Y   Y coordinate
+//  Z   Z coordinate
+//  I   Last X coordinate
+//  J   Last Y coordinate
+//  K   Last Z coordinate
 // 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-e=:XA f=:XB g=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE o=:ZA
-p=:ZB q=:ZC r=:ZD s=:ZE t=999999
-v="station_" :MA=v+"hq_imperial_a" :MB=v+"hq_kingdom_a"
-:MC=v+"proving_grounds" :MD=v+"capital_imperial_a"
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
-:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u=:Q
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
-:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s u+=5
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
-:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s gotou
+t=999999 v=142524700000000 goto18
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d
+X=a/e+b/f+c/g+d/h-i Y=a/j+b/k+c/l+d/m-n Z=a/o+b/p
+:I=:X :J=:Y :K=:Z :X=X :Y=Y :Z=Z+c/q+d/r-s goto2/((a<t+b<t+c<t+d<t)>3)
+a=v+100 :T=v b=0 c=:Q d=0 e=0 f=0 g=0 h=0 i=0 j=0 k=0 l=0 m=0 n=0 o=0
+b++ :T=:T+(d-:T)*(1-:T<a) b/=(b<4)/(:Q==c)/(:T<a) c=:Q goto6
+d=d+(:T-d)*(:A<t) t=d/(:T<a) b=0 :T++ goto6
+:U=v :V=v :W=v a=:Q d="13579:" p=0 q=0 r=0 s=0 t=0 u=0
+b=a c=b-a-- t=t*10+(2*(c>1+c>3+c>5+c>7)+d<(d-c))/1000/(1-c<0) goto9
+t=t-2*t*(c=="-") e+=t*(u==3) f+=t*(u==4) g+=t*(u==5) h+=t*(u==6)
+:U+=t*(u==0) :V+=t*(u==1) :W=+=t*(u==2) i+=t*(u==7) j+=t*(u==8)
+k+=t*(u==9) l+=t*(u==10) m+=t*(u==11) n+=t*(u==12) o+=t*(u==13) u++
+p+=t*(u==15) q+=t*(u==16) r+=t*(u==17) s+=t*(u==18) t=0 goto9-(u>17)*8
+
+
+// Remove the section below, and the goto18 on line 1 when player
+// transmitters work.
+t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
+k=-68626.152 l=100891.412 m=g n=23012.886 o=-2820.507 p=-4787.428
+q=-16480.662 r=1602.298 s=-216741.039 goto2
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-err
