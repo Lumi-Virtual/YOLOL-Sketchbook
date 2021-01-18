@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 // String Sound Player
-// 1.0.2
+// 1.0.3
 // BSC1-10
 // 
 // Plays string sound chips.
@@ -8,8 +8,8 @@
 // 
 // 
 // Requires one audio signal device, with these field names:
-//  SoundOn -> AA
-//  SoundType -> AB
+//  SoundOn -> :AA
+//  SoundType -> :AB
 // 
 // Requries these external memory fields:
 //  :ATrack   // Your string track goes here.
