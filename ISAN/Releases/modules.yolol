@@ -16,6 +16,10 @@ x=:X-:DX y=:DY-:Y z=:DZ-:Z m=sqrt(x^2+y^2) :D=sqrt(x^2+y^2+z^2)
 :P=atan(z/m) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360 goto1
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 
+
+
+
+
 //////////////////////////////////////////////////////////////////////
 // Orientation
 // Pro
@@ -40,13 +44,59 @@ m=sqrt(x^2+y^2) :P=atan(z/m) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360
 n=sqrt(i^2+j^2-z) :R=atan(n/k)+180+(k>0)*((n<0)-0.5)*360 goto2
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 
+
+
+
 //////////////////////////////////////////////////////////////////////
 // Autopilot
 // Pro
 // 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 a=100 b=180 d=360 q=0.5 r=1.5
-e=(((:H-:DH+b)%d)-b) c=cos :R s=sin :R i=:P-:DP j=e/k e=(j>q)*(j<r)*e
+e=((:H-:DH+b)%d)-b c=cos:R s=sin:R i=:P-:DP j=e/k e=(j>q)*(j<r)*e
 e+=k k=e h=a*sin(e/2) n=i/o i=(n>q)*(n<r)*i+o p=a*sin(i/2) g=h*s+p*c
 o=i f=h*c-p*s l=a*m-sqrt(f^2+g^2)*m :FP=g :FY=f :FF=l m=2.4 goto2
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
+vector -> pitch heading & last pitch heading -> FCU Forward Pitch Yaw Roll?
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+x=:I-:X y=:Y-:J z=:Z-:K m=sqrt(x^2+y^2)
+:P=atan(z/m) :H=atan(x/y)+180+(y>0)*(x<0-0.5)*360 goto1
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+// init
+pitch up -> save DP+ -> pitch down -> save DP- -> yaw right -> save DH+ -> yaw left -> save DH-
+
+// otherwise
+point towards target -> update deltas from deltas -> update deltas from movement -> goto 2
+
+:FcuForward :FcuRotationalPitch :FcuRotationalYaw
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot*(1+((pa>0+pb>0+pc>0+pd>0+ha>0+hb>0+hc>0+hd>0)>7)*99)
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0 p=0 h=0
+a=0 pa=0 pb=0 pc=0 pd=0 goto3+sqrt((:I-:X)^2+(:J-:Y)^2+(:K-:Z)^2)>30
+a++ p+=:P h+=:H a=a*(a<5) ha=0 hb=0 hc=0 hd=0 goto4+a<1
+:FcuRotationalPitch=100*(a<1) a++ pa+=:P*(a>5) pb+=:H*(a>5) goto5+a>9
+:FcuRotationalPitch=-100*(a<1) a++ pc+=:P*(a>5) pd+=:H*(a>5) goto6+a>9
+:FcuRotationalYaw=100*(a<1) a++ ha+=:P*(a>5) hb+=:H*(a>5) goto7+a>9
+:FcuRotationalYaw=-100*(a<1) a++ hc+=:P*(a>5) hd+=:H*(a>5) goto8+a>9
+
+// need to get accel And drag of p+ p- y+ y-
+// one tick because very fast ships (maybe decrese sensitivity? (maybe make every axis identical?))
+// several ticks because need accel
+// need py+- because asymetric ships
+// 
+
+:FP=g :FY=f 
+
+
+
+
+

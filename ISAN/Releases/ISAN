@@ -95,7 +95,7 @@
 :D // -  Fourth signal strength
 e
 f
-g
+:G // *  Last Heading
 :H // *  Heading (Yaw)
 :I // *  Last X
 :J // *  Last Y
@@ -103,10 +103,10 @@ g
 l
 m
 n
-o
+:O // *  Last Pitch
 :P // *  Pitch
 :Q // -  First signal recieved message
-:R // *  Roll
+:R // *  Roll ?
 :S // *  Speed
 :T // -  First signal target 
 :U // -  Second signal target
@@ -115,3 +115,10 @@ o
 :X // *  X
 :Y // *  Y
 :Z // *  Z
+
+:DX // *  Destination X
+:DY // *  Destination Y
+:DZ // *  Destination Z
+:G // *  Last Heading
+:O // *  Last Pitch
+:R // *  Roll ?
