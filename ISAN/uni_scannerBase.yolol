@@ -1,0 +1,62 @@
+//////////////////////////////////////////////////////////////////////
+// Uni
+// 2.0.0
+// BSC1
+// 
+// 
+// 
+// External
+//  RA
+//  MA
+//  NA
+// 
+// Relay
+//  A
+//  MA
+//  NA
+// 
+// Internal
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// -
+//  XA
+//  XB
+//  XC
+//  XD
+//  XE
+//  YA
+//  YB
+//  YC
+//  YD
+//  YE
+// -
+//  ZA
+//  ZB
+//  ZC
+//  ZD
+//  ZE
+//  Q
+// 
+// Output
+//  X
+//  Y
+//  Z
+//  I
+//  J
+//  K
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+z="station_" w=z+"hq_imperial_a" x=z+"hq_kingdom_a"
+y=z+"proving_grounds" z+="capital_imperial_a"
+ee=:XA ff=:XB gg=:XC h=:XD i=:XE j=:YA k=:YB l=:YC m=:YD n=:YE o=:ZA
+p=:ZB q=:ZC r=:ZD s=:ZE t=999999 at=5 bt=5 ct=5 :Q=0
+:MA=x an=:NA!=w a=t-:A+((at+3)*ad+:A-e)*an ad=(e-:A)/at/an e=:A at=0
+:MA=y bn=:NA!=x b=t-:A+((bt+2)*bd+:A-f)*bn bd=(f-:A)/bt/bn f=:A bt=0
+:MA=z cn=:NA!=y c=t-:A+((ct+1)*cd+:A-g)*cn cd=(g-:A)/ct/cn g=:A ct=0
+XX=a/ee+b/ff+c/gg+d/h-i YY=a/j+b/k+c/l+d/m-n at+=5 bt+=5 ct+=5 u=:Q+5
+:I=:X :J=:Y :K=:Z :X=XX :Y=YY :Z=a/o+b/p+c/q+d/r-s :MA=w d=t-:A gotou
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|

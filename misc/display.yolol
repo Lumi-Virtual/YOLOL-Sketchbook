@@ -1,0 +1,20 @@
+//////////////////////////////////////////////////////////////////////
+// Display Driver
+// 
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+last_target=target target=-:T+20 target=target+(last_target-target)*(target>last_target) gototarget
+l=t t=-:T+20 t=t+(l-t)*(t>l) gotot
+
+l=t t=-:T+20 t=t+(l-t)*(p>:P) gotot
+
+
+
+:Info0=:ISAN goto:T
+:Info0=:FUEL goto:T
+
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+(:sn_active_prg>:sn_info_pr+:sn_startup>0+:sn_button)>2
+:sn_info=1 :sn_active_prg=:sn_info_pr :snd=:sn_info_out goto18
