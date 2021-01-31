@@ -1,5 +1,7 @@
 // THE COLLECTIVE
 // ISAN AAA 0.0.0
+// 
+// y is forward, x is right, z is up
 //////////////////////////////////////////////////////////////////////
 // A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 // A B C D       H I J K         P q R S         X Y Z
@@ -122,3 +124,13 @@ n
 :G // *  Last Heading
 :O // *  Last Pitch
 :R // *  Roll ?
+
+
+
+
+
+
+station_hq_imperial_a,
+station_proving_grounds,
+station_imperial_outpost_a,
+station_kingdom_outpost_b_2

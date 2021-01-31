@@ -40,7 +40,7 @@ z=:ZP-:Z i=:X-:XR j=:YR-:Y k=:ZR-:Z n=sqrt(i^2+j^2-z)
 // All together
 // 
 x=:X-:XP y=:YP-:Y z=:ZP-:Z i=:X-:XR j=:YR-:Y k=:ZR-:Z
-m=sqrt(x^2+y^2) :P=atan(z/m) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360
+m=sqrt(x^2+y^2) :P=atan(z/m) :H=3
 n=sqrt(i^2+j^2-z) :R=atan(n/k)+180+(k>0)*((n<0)-0.5)*360 goto2
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 
@@ -95,6 +95,106 @@ a++ p+=:P h+=:H a=a*(a<5) ha=0 hb=0 hc=0 hd=0 goto4+a<1
 // 
 
 :FP=g :FY=f 
+
+//goto3+((:I-:X)*(:I-:X)+(:J-:Y)*(:J-:Y)+(:K-:Z)*(:K-:Z))>900
+
+
+:FcuRotationalPitch=-100*(o<1) o++ c=:P d=:H o=o*(o<9) goto8+o<1
+j= // something with o1 and o2
+(total movement > max) :FcuRotationalPitch=100*j*() goto10+()
+// wait until stoped
+:FcuRotationalYaw=100*(o<1) o++ e=:P f=:H o=o*(o<9) goto12+o<1
+k= // something with o2 and o3
+(total movement > max) :FcuRotationalPitch=100*k*() goto14+()
+// wait until stoped
+:FcuRotationalYaw=-100*(o<1) o++ g=:P h=:H o=o*(o<9) goto16+o<1
+l= // something with o3 and o4
+(total movement > max) :FcuRotationalPitch=100*l*() goto18+()
+// wait until stoped
+
+
+
+save orientation
+$START pitch up one tick
+wait until we stop rotating
+save orientation
+IF we rotate too much THEN
+    change sensitivity based on how much we moved to be reasonable
+END
+start rotating
+stop rotating when we go past some angle
+wait until we stop rotating
+save orientation
+GOTO $START BUT FOR PITCH + - AND YAW + -
+
+P: p+ h+ p- h-
+P: a  b  c  d
+Y: p+ h+ p- h-
+Y: e  f  g  h
+
+multipliers
+i j k l
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----| // USE LEVERS AS TIMING
+goto1+:Autopilot*(1+((a>0+b>0+c>0+d>0+e>0+f>0+g>0+h>0)>7)*99)
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0 o=0 p=12.5
+m=:P n=:H goto3+sqrt((:I-:X)^2+(:J-:Y)^2+(:K-:Z)^2)>30
+:FcuRotationalPitch=p*(o<1) o++ a=:P b=:H o=o*(o<51) goto4+o<1
+:FcuRotationalPitch=-p*(o<1) o++ c=:P d=:H o=o*(o<51) goto5+o<1
+:FcuRotationalYaw=p*(o<1) o++ e=:P f=:H o=o*(o<51) goto6+o<1
+:FcuRotationalYaw=-p*(o<1) o++ g=:P h=:H o=o*(o<51) goto7+o<1
+g-=e h-=f e-=c f-=d c-=a d-=b a-=m b-=n
+i= j= k= l= // ijkl = total difference, maybe need xyzijk? if too small we redo with a higher base multiplier, p*=2 goto2/((i>99+j>99+k>99+l>99)>3)
+i= j= k= l= // ijkl = corrected multipliers
+:FcuRotationalPitch= :FcuRotationalYaw=
+// get difference from ship to target
+// use ab cd ef gh based on if + or - in p and h
+// how many ticks to get there ? maybe setup a lever to get exact measurements
+
+
+
+
+
+
+
+
+
+
+// P+ P- Y+ Y-
+// scales
+a b c d
+// rotation pitch heading pairs
+ef gh ij kl
+
+
+// each axis has a scale of {10}, and a rotation of {some degrees} assuming a roll=0 config
+// save orientation0
+// rotate {one} step towards target
+// save orientation1
+// update scale and rotation from new difference, find a good number of steps for next cycle
+// goto rotate
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0
+abc def geh ijk
+
+x=:I-:X y=:J-:Y z=:K-:Z l=sqrt(x^2+y^2+z^2) x/=l y/=l z/=l
+u=:X-:DX v=:DY-:Y w=:DZ-:Z m=sqrt(x^2+y^2+z^2) x/=m y/=m z/=m
+
+
+// P+ P- Y+ Y-
+abc def geh ijk
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,219 @@
+
+
+
+
+// each axis has a {small vector} assuming a roll=0 config
+// save direction0
+// rotate {one} step towards target
+// save direction1
+// update used vectors from actual movement
+// shift unused vectors from actual movement
+// find a good number of steps for next cycle
+// goto rotate
+
+
+// our direction    [3]
+abc
+// dest direction (RR space) [3]
+def
+// up vector [3]
+ghi
+// thrust step size [4]
+jklm
+// previous burn    [2]
+no
+// dest direction (ORN plane) [3]
+pqr
+// last ^                     [2]
+st
+// delta ^                     [2]
+uv
+
+
+//VAR change
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0
+u=0 v=0 w=1                                                    //Init UP (uvw)  //Need to make this perp 
+pbj=0 pbk=0                                                    //Init previous burn (pbj, pbk)
+x=:I-:X  y=:J-:Y  z=:K-:Z  m=sqrt(x^2+y^2+z^2) x/=m y/=m z/m   //Get DS (xyz)
+i=:X-:DX j=:DY-:Y k=:DZ-:Z n=sqrt(i^2+j^2+k^2) i/=n j/=n k/=n  //GET DD[RR-s] (ijk)
+
+//Transform DD[RR-s] (ijk) -> DD[DR-s] (i2, j2, k2)       (DD[ORN-p] = (j2, k2))
+i2 = (x)*i + (yw-zv)*j + (u)*k
+j2 = (y)*i + (uz-xw)*j + (v)*k
+k2 = (z)*i + (xv-uy)*j + (w)*k
+
+//GET deltaDD[ORN-p] (dj2,dk2) (from previons (pj2, pk2))
+dj2=j2-pj2  pj2=j2
+dk2=k2-pk2  pk2=k2
+
+
+//This will need to be modified based on the direction being infront or behind us
+//GET theta between deltaDD[ORN-p] (dj2,dk2) and previous burn (pbj, pbk) 
+MdDD = sqrt(dj2^2 + dk2^2)  //Magnitude of deltaDD[ORN-p] (dj2,dk2)
+Mpb  = sqrt(pbj^2 + pbk^2)  //Magnitude of previous burn (pbj, pbk)
+t=0 t=arccos( ((dj2*pbj)^2 + (dk2*pbk)^2)/(MdDD*Mpb))
+
+
+//UP Vector correction (we know what roll we're at now)
+//c=cos(t) s=sin(t) m=1-c
+//u2 = (c + i^2*m)*u   + (i*j*m - k*s)*v + (i*k*m + j*s)*w
+//v2 = (i*j*m + k*s)*u + (c + j^2*m)*v   + (j*k*m - i*s)*w
+//w2 = (k*i*m - j*s)*u + (k*j*m + i*s)*v + (c + k^2*m)*w
+//u=u2 v=v2 w=w2
+
+//DD[ORN-p] correction (so we can burn in the right direction)
+pbj  = c*j2 -s*k2
+pbk  = s*j2 +c*k2
+
+//DD[DR-s] corrected (i2,pbj,pbk)
+//Project down onto (xy plane of DR-s) -> (i2,pbk)  (angle will be how much to yaw)
+//Project side onto (xz plane of DR-s) -> (i2,pbj)  (== to pitch)
+
+tY=atan(i2/pbk)+180+(pbk>0)*((i2<0)-0.5)*360
+tP=atan(i2/pbj)+180+(pbj>0)*((i2<0)-0.5)*360
+
+
+
+
+//Do a burn in pbj pbk
+:FcuRotationalYaw=tY*(Yp+(pbj<0)*(Yn-Yp)) :FcuRotationalPitch=tP*(Pp+(pbk<0)*(Pn-Pp))
+goto #line+1*(:FcuRotationalYaw==0 * :FcuRotationalPitch==0)
+
+//Loop
+goto //Get DS (xyz)
+
+
+
+
+//INITIAL ATTEMPT
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0
+u=0 v=0 w=1                                                    //Init UP (uvw)
+pbj=0 pbk=0                                                    //Init previous burn (pbj, pbk)
+x=:I-:X  y=:J-:Y  z=:K-:Z  m=sqrt(x^2+y^2+z^2) x/=m y/=m z/m   //Get DS (xyz)
+i=:X-:DX j=:DY-:Y k=:DZ-:Z n=sqrt(i^2+j^2+k^2) i/=n j/=n k/=n  //GET DD[RR-s] (ijk)
+
+//Transform DD[RR-s] (ijk) -> DD[DR-s] (i2, j2, k2)       (DD[ORN-p] = (j2, k2))
+i2 = (x)*i + (yw-zv)*j + (u)*k
+j2 = (y)*i + (uz-xw)*j + (v)*k
+k2 = (z)*i + (xv-uy)*j + (w)*k
+
+//GET deltaDD[ORN-p] (dj2,dk2) (from previons (pj2, pk2))
+dj2=j2-pj2  pj2=j2
+dk2=k2-pk2  pk2=k2
+
+//GET theta between deltaDD[ORN-p] (dj2,dk2) and previous burn (pbj, pbk)
+MdDD = sqrt(dj2^2 + dk2^2)  //Magnitude of deltaDD[ORN-p] (dj2,dk2)
+Mpb  = sqrt(pbj^2 + pbk^2)  //Magnitude of previous burn (pbj, pbk)
+t=0 t=arccos( ((dj2*pbj)^2 + (dk2*pbk)^2)/(MdDD*Mpb))
+
+//UP Vector correction (we know what roll we're at now)
+c=cos(t) s=sin(t) m=1-c
+u2 = (c + i^2*m)*u   + (i*j*m - k*s)*v + (i*k*m + j*s)*w
+v2 = (i*j*m + k*s)*u + (c + j^2*m)*v   + (j*k*m - i*s)*w
+w2 = (k*i*m - j*s)*u + (k*j*m + i*s)*v + (c + k^2*m)*w
+u=u2 v=v2 w=w2
+
+//DD[ORN-p] correction (so we can burn in the right direction)
+pbj  = c*j2 -s*k2
+pbk  = s*j2 +c*k2
+
+//Do a burn in pbj pbk
+//TODO
+
+//Loop
+goto //Get DS (xyz)
+//-----------------
+
+
+//get Ship direction vector DS (xyz)    (ship centered, real space orientation [RR-s])
+//get Dest direction vector DD (ijk)    (ship centered, real space orientation)
+//UP (uvw)  //initially = 0,0,1
+
+//transform (using "up") -> DS on axis  (move to ship centered, direction orientated [DR-s])
+    //TRANSFORM MAT
+    // x (yw-zv) u
+    // y (uz-xw) v
+    // z (xv-uy) w
+
+    // DD[SR-s] = /\ * DD[RR-s]
+
+    // [ i' ]   [ a b c ]   [ i ]
+    // [ j' ] = [ d e f ] * [ j ]
+    // [ k' ]   [ g h i ]   [ k ]
+
+    // i' = (x)*i + (yw-zv)*j + (u)*k
+    // j' = (y)*i + (uz-xw)*j + (v)*k
+    // k' = (z)*i + (xv-uy)*j + (w)*k
+
+//get position of DD on ORN-plane
+    // DD[ORN-p] = (j', k')
+
+// work out roll_error -> angle between previous attempted burn vector & the -ve differecne of this DD[ORN-p] & last DD[ORN-p]
+
+//Roll error correct (rotate DD[ORN-p] & UP by roll error) (if not first iter)
+    //UP CORRECTION
+    // c = cos(t)
+    // s = sin(t)
+    // m= 1-cos(t)
+
+    // u' = (c + i^2*m)*u   + (i*j*m - k*s)*v + (i*k*m + j*s)*w
+    // v' = (i*j*m + k*s)*u + (c + j^2*m)*v   + (j*k*m - i*s)*w
+    // w' = (k*i*m - j*s)*u + (k*j*m + i*s)*v + (c + k^2*m)*w
+
+    //DD[ORN-p] correction
+    // j'C  = c*j' -s*k'
+    // k'C  = s*j' +c*k'
+    
+
+//based on quadrant of DD[ORN-p], burn in Y+P+, Y+P-, Y-P+, Y-P- (scaled with distance to DD[ORN-p])
+
+//save "last burn" (corrected DD[ORN-p]) & last DD[ORN-p](not corrected) for next loop
+
+
+///---------------------
+
+
+//https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
+
+
+
+// c + i^2*m        i*j*m - k*s      i*k*m + j*s
+// i*j*m + k*s      c + j^2*m        j*k*m - i*s
+// k*i*m - j*s      k*j*m + i*s      c + k^2*m
+
+// UP' = /\ * UP
+// [ u' ]   [ a b c ]   [ u ]
+// [ v' ] = [ d e f ] * [ v ]
+// [ w' ]   [ g h i ]   [ w ]
+
+
+//UP CORRECTION
+// c = cos(t)
+// s = sin(t)
+// m= 1-cos(t)
+
+// u' = (c + i^2*m)*u   + (i*j*m - k*s)*v + (i*k*m + j*s)*w
+// v' = (i*j*m + k*s)*u + (c + j^2*m)*v   + (j*k*m - i*s)*w
+// w' = (k*i*m - j*s)*u + (k*j*m + i*s)*v + (c + k^2*m)*w
+
+
+
+
+
+
+
+//for each axis (+ & -)
+    //save cur dir
+    //push in {axis}
+    //diff saved dir with cur dir => {axis} vector
+
+//get diff vector cur -> dest
+//work out a combination of axis vectors to move cur -> dest
+
+
+// P+ P- Y+ Y-
+abc def geh ijk

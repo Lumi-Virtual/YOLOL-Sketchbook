@@ -1,0 +1,74 @@
+// autopilot
+
+// get last, ship, destination vectors
+// rotate ship and dest such that ship would be towards 0,y,0
+// save difference in angle from ship to last and dest. to correct movement multilpiers
+// rotate dest around ship by the angle between ship and dest, ignoring y
+// get dest p and h and autopilot with those times the direction sensitivities
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0
+
+a // p+
+b // p-
+c // y+
+d // y-
+efgh
+ijk // last
+lmnopqrst
+uvw // dest
+xyz // ship
+
+// get last, ship, destination vectors
+i=x j=y k=z
+x=:I-:X  y=:J-:Y  z=:K-:Z  m=sqrt(x^2+y^2+z^2) x/=m y/=m z/m
+i=:X-:DX j=:DY-:Y k=:DZ-:Z n=sqrt(i^2+j^2+k^2) i/=n j/=n k/=n
+
+// rotate ship and dest such that last would be towards 0,y,0 (or whatever 0 pitch 0 hheading is) and ship would be (mostly) towards x, but it should only have 2 components (lettig us easily atan2 ship relative to dest)
+xyz ijk
+// https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
+x=
+y=
+z=
+
+u=
+v=
+w=
+
+// correct movement multilpiers with difference in angle from, ship to last and ship to dest
+xyz ijk uvw
+// atan2 and some other stuff
+a=
+b=
+c=
+d=
+
+// rotate dest around ship by [the angle between ship and dest, ignoring each vectors y componenet] and such that ship would be 0,y,0
+xyz ijk uvw
+// https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
+u=
+v=
+w=
+
+// get dest p and h and autopilot with those times the direction sensitivities
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----| Orn (oh theres a lot to fix with these actually)
+m=sqrt(x^2+y^2) :P=atan(z/m) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----| Auto (remove roll, also fix for 4 directions)
+e=(((:H-:DH+b)%d)-b) c=cos :R s=sin :R i=:P-:DP j=e/k e=(j>q)*(j<r)*e
+e+=k k=e h=a*sin(e/2) n=i/o i=(n>q)*(n<r)*i+o p=a*sin(i/2) g=h*s+p*c
+o=i f=h*c-p*s l=a*m-sqrt(f^2+g^2)*m :FP=g :FY=f :FF=l m=2.4 goto2
+
+
+
+
+
+
+
+
+
+
+
+cos A cos B         cos A sin B sin C - sin A cos B
