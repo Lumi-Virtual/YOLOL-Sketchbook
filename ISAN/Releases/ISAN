@@ -3,165 +3,6 @@
 // 
 // y is forward, x is right, z is up
 //////////////////////////////////////////////////////////////////////
-// A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-// A B C D       H I J K         P q R S         X Y Z
-// 
-// External
-//  RA
-//  RB
-//  RC
-//  RD
-//  MA
-//  MB
-//  MC
-//  MD
-//  NA
-//  NB ?
-// -
-//  NC ?
-//  ND ?
-//  DX
-//  DY
-//  DZ
-// 
-// Relay
-//  A
-//  B
-//  C
-//  D
-//  MA
-//  MB
-//  MC
-//  MD
-//  NA
-// -
-//  DX
-//  DY
-//  DZ
-// 
-// Internal
-//  X
-//  Y
-//  Z
-//  I
-//  J
-//  K
-//  S
-//  P
-//  H
-//  R
-// -
-//  XA
-//  XB
-//  XC
-//  XD
-//  XE
-//  YA
-//  YB
-//  YC
-//  YD
-//  YE
-// -
-//  ZA
-//  ZB
-//  ZC
-//  ZD
-//  ZE
-//  Q
-//  DP
-//  DH
-// 
-// Output
-//  X
-//  Y
-//  Z
-//  I
-//  J
-//  K
-//  S
-//  P
-//  H
-//  R
-// -
-//  DP
-//  DH
-//  FF
-//  FP
-//  FY
-
-
-
-:A // -  First signal strength
-:B // -  Second signal strength
-:C // -  Third signal strength
-:D // -  Fourth signal strength
-e
-f
-:G // *  Last Heading
-:H // *  Heading (Yaw)
-:I // *  Last X
-:J // *  Last Y
-:K // *  Last Z
-l
-m
-n
-:O // *  Last Pitch
-:P // *  Pitch
-:Q // -  First signal recieved message
-r
-:S // *  Speed
-:T // -  First signal target 
-:U // -  Second signal target
-:V // -  Third signal target 
-:W // -  Fourth signal target
-:X // *  X
-:Y // *  Y
-:Z // *  Z
-
-:DX // *  Destination X
-:DY // *  Destination Y
-:DZ // *  Destination Z
-:G // *  Last Heading
-:O // *  Last Pitch
-:R // *  Roll ?
-
-
-
-
-
-
-station_hq_imperial_a,
-station_proving_grounds,
-station_imperial_outpost_a,
-station_kingdom_outpost_b_2
-
-
-
-
-
-
-
-
-
-
-
-////////////////////////////maybe works we dont know (it works fairly well but couild be better)
-station_hq_imperial_a
-station_proving_grounds
-station_kingdom_outpost_b
-station_kingdom_outpost_b_2
-
-[
-  //[1.1952994010080074,9.658064971199153,-32.820111172741896,11.071960867637022],
-  [207744.95378767542,-1550111.534175702,486779.2917010112,-160699.39211577387],
-  [-140483.07030163254,103669.79684464238,799664.6982989181,-264673.52171692275],
-  [-230400.9082399712,345153.5928013872,41051.447758899194,-43636.343929853516]
-]
-
-
-
-
-/// newest
 :A // -  First signal strength
 :B // -  Second signal strength
 :C // -  Third signal strength
@@ -193,3 +34,10 @@ o
 :DY   // *  Destination Y
 :DZ   // *  Destination Z
 :ISAN // -  Display
+
+// mostly works but is temporary
+e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
+j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
+o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
+dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
+ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2"

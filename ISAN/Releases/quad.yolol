@@ -5,46 +5,14 @@
 // 
 // 
 // 
-// A Reciever Target Message
-// "station_hq_imperial_a"
-// B Reciever Target Message
-// "station_hq_kingdom_a"
-// C Reciever Target Message
-// "station_proving_grounds"
-// D Reciever Target Message
-// "station_capital_imperial_a"
-// 
-// External
-//  A   First signal strength
-//  B   Second signal strength
-//  C   Third signal strength
-//  D   Fourth signal strength
-// 
-// Internal
-//  X   X coordinate
-//  Y   Y coordinate
-//  Z   Z coordinate
-//  I   Last X coordinate
-//  J   Last Y coordinate
-//  K   Last Z coordinate
-// 
-// Output
-//  X   X coordinate
-//  Y   Y coordinate
-//  Z   Z coordinate
-//  I   Last X coordinate
-//  J   Last Y coordinate
-//  K   Last Z coordinate
-// 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
 j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
 o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
-dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
-ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
-:U=bt :V=ct :W=dt
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d xx=d/h-i
-:X=a/e+b/f+c/g+xx :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s :I++ goto7
+:W="station_" :T=:W+"hq_imperial_a" :U=:W+"proving_grounds"
+:V=:W+"kingdom_outpost_b" :W+="kingdom_outpost_b_2" t=999999
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d xx=a/e+b/f
+:X=xx+c/g+d/h-i :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s :I++ goto6
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 
 
@@ -52,16 +20,12 @@ a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d xx=d/h-i
 e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
 j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
 o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
-dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
-ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
-ad=1000 bd="\nX:" cd="\nY:" dd="\nZ:" ed="\nS:" :U=bt :V=ct :W=dt
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d
-XX=a/e+b/f+c/g+d/h-i YY=a/j+b/k+c/l+d/m-n ZZ=a/o+b/p+c/q+d/r-s gotogb
-x+=XX y+=YY z+=ZZ gb+=(ii++>3) ii*=ii<4 :I++ goto11
-SS=sqrt((x-u)^2+(y-v)^2+(z-w)^2)/12 gb=9 u=x v=y w=z x=0 y=0 z=0 :I++
+:W="station_" :T=:W+"hq_imperial_a" :U=:W+"proving_grounds"
+:V=:W+"kingdom_outpost_b" :W+="kingdom_outpost_b_2" t=999999
+ad=1000 bd="\nX:" cd="\nY:" dd="\nZ:" ed="\nS:" gb=9
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d xx=a/e+b/f
+XX=xx+c/g+d/h-i YY=a/j+b/k+c/l+d/m-n ZZ=a/o+b/p+c/q+d/r-s :I++ gotogb
+x+=XX y+=YY z+=ZZ gb+=ii++>3 ii*=ii<4 goto11
+SS=sqrt((x-u)^2+(y-v)^2+(z-w)^2)/16 gb=9 u=x v=y w=z x=0 y=0 z=0
 :ISAN=bd+XX/ad*ad+cd+YY/ad*ad+dd+ZZ/ad*ad+ed+SS/ad*ad goto7
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-
-
-
-
