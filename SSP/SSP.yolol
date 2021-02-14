@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 // String Sound Player
 // 2a.0.0
-// BSC1-10
+// BSC2-10
 // 
 // Plays string sound chips.
 // 
@@ -12,27 +12,28 @@
 //  SoundType -> :AT
 // 
 // Requries these external memory fields:
-//  :SSP0     // 1 = Reset. 2 = Pause. 3 = Play. Set to 4 for a tick when a song finishes.
+//  :SSP0     // 1 = Reset. 2 = Pause. 3 = Play. Set to 4 for a tick
+//               when a song finishes.
 //  :ATrack   // Your string track goes here.
 //  :AN
-//  :BN
+//  :AM
 //  :AS
-//  :BS
+//  :AZ
 // 
 // 
 // 
 // If you want to add more tracks that play at the same time, search
-// and replace every ':A' with any even letter of the alphabet. Then
-// do the same with ':B' and choose any odd letter.
+// and replace every ':A' with some other letter.
 // 
 // 
-// Feel free to mix and match which sounds are on which chips. Any
-// sound can be in any place on any chip.
+// If you want to add more song players, incriment the number on :SSP0
+// to something else.
 // 
 // 
 // Keep in mind that the numbers here are the actual sound numbers,
 // and that ones in the code are these +1.
 // 
+// (all of these sound codes are subject to change)
 // Notes
 //  a 80   C Natural 5
 //  b 81   C Sharp 5
@@ -96,24 +97,22 @@
 // Meow
 //  ~ 99
 //--+-Bsc|1---+----|----+----|----+----|----+----|----+----|----+----|
-t=:ASrack v="`" w="n" x=81 y=-1 :BN=y :BS=0 :SSP0=2
+t=:ATrack v="`" w="n" x=81 y=-1 :AM=y :AZ=0 :SSP0=2
 goto:SSP0
-s=:BS k=t :AS=k-t-- :BN+=(s>v)*(s<w)*x :AO=:AN>y :AT=:AN :AN=y z=:SSP0
-s=:AS k=t :BS=k-t-- :AN+=(s>v)*(s<w)*x :AO=:BN>y :AT=:BN :BN=y gotoz
+s=:AZ k=t :AS=k-t-- :AM+=(s>v)*(s<w)*x :AO=:AN>y :AT=:AN :AN=y z=:SSP0
+s=:AS k=t :AZ=k-t-- :AN+=(s>v)*(s<w)*x :AO=:AM>y :AT=:AM :AM=y gotoz
 :SSP0=4 goto1
 //--+-Bsc|2---+----|----+----|----+----|----+----|----+----|----+----|
 a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i" j="j" :SSP0=2
 k="k" l="l" m="m" goto:SSP0
-s=:BS :BN+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m z=:SSP0
+s=:AZ :AM+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m z=:SSP0
 s=:AS :AN+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m gotoz
 //--+-Bsc|3---+----|----+----|----+----|----+----|----+----|----+----|
 a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i" :SSP0=2
 v="group low edge" w="group high edge" x=#groupOffset goto:SSP0
-s=:BS :BN+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i z=:SSP0
+s=:AZ :AM+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i z=:SSP0
 s=:AS :AN+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i gotoz
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-
-
 
 
 
