@@ -2,7 +2,7 @@
 // Quad
 // 2.0.0
 // BSC1
-//
+// 
 // 
 // 
 // A Reciever Target Message
@@ -37,9 +37,31 @@
 //  K   Last Z coordinate
 // 
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
-t=999999 e=39665.376 f=-e g=-t*t*t h=g i=22.057 j=214589.611
-k=-68626.152 l=100891.412 m=g n=23012.886 o=-2820.507 p=-4787.428
-q=-16480.662 r=1602.298 s=-216741.039
-a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d X=a/e+b/f+c/g+d/h-i
-:I=:X :J=:Y :K=:Z :X=X :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s goto4
+e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
+j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
+o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
+dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
+ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
+:U=bt :V=ct :W=dt
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d xx=d/h-i
+:X=a/e+b/f+c/g+xx :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s :I++ goto7
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
+j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
+o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
+dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
+ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
+ad=1000 bd="\nX:" cd="\nY:" dd="\nZ:" ed="\nS:" :U=bt :V=ct :W=dt
+a=t-:A b=t-:B c=t-:C d=t-:D a*=a b*=b c*=c d*=d
+XX=a/e+b/f+c/g+d/h-i YY=a/j+b/k+c/l+d/m-n ZZ=a/o+b/p+c/q+d/r-s gotogb
+x+=XX y+=YY z+=ZZ gb+=(ii++>3) ii*=ii<4 :I++ goto11
+SS=sqrt((x-u)^2+(y-v)^2+(z-w)^2)/12 gb=9 u=x v=y w=z x=0 y=0 z=0 :I++
+:ISAN=bd+XX/ad*ad+cd+YY/ad*ad+dd+ZZ/ad*ad+ed+SS/ad*ad goto7
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
+

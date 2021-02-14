@@ -108,7 +108,7 @@ n
 :O // *  Last Pitch
 :P // *  Pitch
 :Q // -  First signal recieved message
-:R // *  Roll ?
+r
 :S // *  Speed
 :T // -  First signal target 
 :U // -  Second signal target
@@ -134,3 +134,62 @@ station_hq_imperial_a,
 station_proving_grounds,
 station_imperial_outpost_a,
 station_kingdom_outpost_b_2
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////maybe works we dont know (it works fairly well but couild be better)
+station_hq_imperial_a
+station_proving_grounds
+station_kingdom_outpost_b
+station_kingdom_outpost_b_2
+
+[
+  //[1.1952994010080074,9.658064971199153,-32.820111172741896,11.071960867637022],
+  [207744.95378767542,-1550111.534175702,486779.2917010112,-160699.39211577387],
+  [-140483.07030163254,103669.79684464238,799664.6982989181,-264673.52171692275],
+  [-230400.9082399712,345153.5928013872,41051.447758899194,-43636.343929853516]
+]
+
+
+
+
+/// newest
+:A // -  First signal strength
+:B // -  Second signal strength
+:C // -  Third signal strength
+:D // -  Fourth signal strength
+e
+f
+g
+:H // *  Heading (Yaw)
+:I // *  Incrementor
+j
+k
+l
+m
+n
+o
+:P // *  Pitch
+:Q // -  First signal recieved message
+:R // *  Roll
+:S // *  Speed
+:T // -  First signal target 
+:U // -  Second signal target
+:V // -  Third signal target 
+:W // -  Fourth signal target
+:X // *  X
+:Y // *  Y
+:Z // *  Z
+
+:DX   // *  Destination X
+:DY   // *  Destination Y
+:DZ   // *  Destination Z
+:ISAN // -  Display

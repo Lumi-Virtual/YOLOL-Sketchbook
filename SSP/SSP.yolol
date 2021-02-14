@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 // String Sound Player
-// 1.0.3
+// 2a.0.0
 // BSC1-10
 // 
 // Plays string sound chips.
@@ -8,14 +8,14 @@
 // 
 // 
 // Requires one audio signal device, with these field names:
-//  SoundOn -> :AA
-//  SoundType -> :AB
+//  SoundOn -> :AO
+//  SoundType -> :AT
 // 
 // Requries these external memory fields:
+//  :SSP0     // 1 = Reset. 2 = Pause. 3 = Play. Set to 4 for a tick when a song finishes.
 //  :ATrack   // Your string track goes here.
-//  :Ply      // 3 = Play. 1 = Reset.
-//  :A
-//  :B
+//  :AN
+//  :BN
 //  :AS
 //  :BS
 // 
@@ -36,23 +36,21 @@
 // Notes
 //  a 80   C Natural 5
 //  b 81   C Sharp 5
-// ^^^^^^ First Chip ^^^^^^
 //  c 82   D Natural 5
 //  d 83   D Sharp 5
 //  e 84   E Natural 5
 //  f 85   F Natural 5
 //  g 86   F Sharp 5
 //  h 87   G Natural 5
-// ^^^^^^ Second Chip ^^^^^^
 //  i 88   G Sharp 5
 //  j 89   A Natural 5
 //  k 90   A Sharp 5
 //  l 91   B Natural 5
 //  m 92   C Natural 6
+// ^^^^^^ First and Second Chips ^^^^^^
 // 
 // Drums
 //  { 70   Bass Drum
-// ^^^^^^ Third Chip ^^^^^^
 //  | 71   Snare Drum
 //  } 72   Tom drum
 // 
@@ -61,28 +59,24 @@
 //  o 1
 //  p 2
 //  q 3
-// ^^^^^^ Fourth Chip ^^^^^^
 //  r 4
 //  s 5
 //  t 6
 //  u 7
 //  v 8
 //  w 9
-// ^^^^^^ Fifth Chip ^^^^^^
 //  x 10
 //  y 11
 //  z 12
 //  0 13
 //  1 14
 //  2 15
-// ^^^^^^ Sixth Chip ^^^^^^
 //  3 16
 //  4 17
 //  5 18
 //  6 19
 //  7 20
 //  8 21
-// ^^^^^^ Seventh Chip ^^^^^^
 //  9 22
 // 
 // Endo Voices
@@ -91,68 +85,45 @@
 //  < 52
 //  = 53
 //  > 54
-// ^^^^^^ Eighth Chip ^^^^^^
 //  ? 55
 //  @ 56
 //  [ 57
 //  \ 58
 //  ] 59
 //  ^ 60
-// ^^^^^^ Ninth Chip ^^^^^^
 //  ` 61
 // 
 // Meow
 //  ~ 99
-// ^^^^^^ Tenth Chip ^^^^^^
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 1
-t=:ATrack a="a" b=81 c="b" d=82 z=-1 :BS=0 :B=z
-goto :Ply
-s=:BS k=t t-- :AS=k-t :B+=(s==a)*b+(s==c)*d :AA=:A>z :AB=:A :A=z
-s=:AS k=t t-- :BS=k-t :A+=(s==a)*b+(s==c)*d :AA=:B>z :AB=:B :B=z goto2
-goto1
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 2
-a="c" b=83 c="d" d=84 e="e" f=85 g="f" h=86 i="g" j=87 k="h" l=88
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 3
-a="i" b=89 c="j" d=90 e="k" f=91 g="l" h=92 i="m" j=93 k="{" l=71
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 4
-a="|" b=72 c="}" d=73 e="n" f=1 g="o" h=2 i="p" j=3 k="q" l=4
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 5
-a="r" b=5 c="s" d=6 e="t" f=7 g="u" h=8 i="v" j=9 k="w" l=10
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 6
-a="x" b=11 c="y" d=12 e="z" f=13 g="0" h=14 i="1" j=15 k="2" l=16
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 7
-a="3" b=17 c="4" d=18 e="5" f=19 g="6" h=20 i="7" j=21 k="8" l=22
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 8
-a="9" b=23 c=":" d=51 e=";" f=52 g="<" h=53 i="=" j=54 k=">" l=55
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 9
-a="?" b=56 c="@" d=57 e="[" f=58 g="\" h=59 i="]" j=60 k="^" l=61
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d+(s==e)*f+(s==g)*h+(s==i)*j+(s==k)*l goto z
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| 10
-a="`" b=62 c="~" d=100
-goto :Ply
-s=:BS :B+=(s==a)*b+(s==c)*d z=:Ply
-s=:AS :A+=(s==a)*b+(s==c)*d goto z
+//--+-Bsc|1---+----|----+----|----+----|----+----|----+----|----+----|
+t=:ASrack v="`" w="n" x=81 y=-1 :BN=y :BS=0 :SSP0=2
+goto:SSP0
+s=:BS k=t :AS=k-t-- :BN+=(s>v)*(s<w)*x :AO=:AN>y :AT=:AN :AN=y z=:SSP0
+s=:AS k=t :BS=k-t-- :AN+=(s>v)*(s<w)*x :AO=:BN>y :AT=:BN :BN=y gotoz
+:SSP0=4 goto1
+//--+-Bsc|2---+----|----+----|----+----|----+----|----+----|----+----|
+a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i" j="j" :SSP0=2
+k="k" l="l" m="m" goto:SSP0
+s=:BS :BN+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m z=:SSP0
+s=:AS :AN+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m gotoz
+//--+-Bsc|3---+----|----+----|----+----|----+----|----+----|----+----|
+a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i" :SSP0=2
+v="group low edge" w="group high edge" x=#groupOffset goto:SSP0
+s=:BS :BN+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i z=:SSP0
+s=:AS :AN+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i gotoz
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+a="  aacdfhf hhjlmlj hfhmkhf hfhmkhf ahfdcca aacdfhf hfhmkhf hfhmkhf "
+a+="ahfdcca aacdfhf hfhmkhf hfhmkhf ahfdcca aacdfhf hfhmkhf hfhmkhf a"
+a+="acdfhf hhjlmlj hfhmkhf hfhmkhf ahfdcca aacdfhf hfhmkhf hfhmkhf ah"
+a+="fdcca aacdfhf hfhmkhf hfhmkhf ahfdcca aacdfhf hfhmkhf hfhmk h f d"
+a+="fdcca aacdfhf hfhmkhf hfhmkhf ahfdcca aacdfhf hfhmkhf hfhmk h f d"
+a+=" cdf hfdcacdfh a hkm hfdcacaacdcacdf hfdcacdfh a hkm hfdca g f d "
+a+="cdf hfdcacdfh a hkm hfdcacaacdcacdf hfdcacdfh a hkm hfdca"
+:ATrack=a goto1 // Bad Apple Demo Memory Loader
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|

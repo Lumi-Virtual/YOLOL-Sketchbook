@@ -26,15 +26,35 @@
 //  J
 //  K
 // 
-//--+----|----+----|----+----|----+----|----+----|----+----|----+----| // ad : to at bt ct when debugging
-z="station_" w=z+"hq_imperial_a" x=z+"hq_kingdom_a"
-y=z+"proving_grounds" z+="capital_imperial_a"
-t=999999 ee=39665.376 ff=-ee gg=-t*t*t h=gg i=22.057 j=214589.611
-k=-68626.152 l=100891.412 m=gg n=23012.886 o=-2820.507 p=-4787.428
-q=-16480.662 r=1602.298 s=-216741.039 at=5 bt=5 ct=5
-:T=x an=:Q!=w a=t-:A+((at+3)*ad+:A-e)*an ad=(e-:A)/at/an e=:A at=0
-:T=y bn=:Q!=x b=t-:A+((bt+2)*bd+:A-f)*bn bd=(f-:A)/bt/bn f=:A bt=0
-:T=z cn=:Q!=y c=t-:A+((ct+1)*cd+:A-g)*cn cd=(g-:A)/ct/cn g=:A ct=0
-XX=a/ee+b/ff+c/gg+d/h-i YY=a/j+b/k+c/l+d/m-n at+=5 bt+=5 ct+=5
-:I=:X :J=:Y :K=:Z :X=XX :Y=YY :Z=a/o+b/p+c/q+d/r-s :T=w d=t-:A goto5
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----| Azurethi
+e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
+j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
+o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
+dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
+ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
+:T=bt a=t-:A a*=a ar=(a-la)/5 arr=(ar-lar)/5 la=a lar=ar ga++ goto11
+:T=ct b=t-:A b*=b br=(b-lb)/5 brr=(br-lbr)/5 lb=b lbr=br ga++ goto11
+:T=dt c=t-:A c*=c cr=(c-lc)/5 crr=(cr-lcr)/5 lc=c lcr=cr ga++ goto11
+:T=at d=t-:A d*=d dr=(d-ld)/5 drr=(dr-ldr)/5 ld=d ldr=dr ga=7 goto11
+:X=a/e+b/f+c/g+d/h-i :Y=a/j+b/k+c/l+d/m-n :Z=a/o+b/p+c/q+d/r-s :I++
+ar+=arr br+=brr cr+=crr dr+=drr a+=ar b+=br c+=cr d+=dr gotoga
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----| Azurethi
+e= 207744.954 f=-1550111.534 g=486779.292 h=-160699.392 i=-46169.175
+j=-140483.070 k=  103669.797 l=799664.698 m=-264673.522 n= -4718.935
+o=-230400.908 p=  345153.593 q= 41051.448 r= -43636.344 s= -1606.533
+dt="station_" at=dt+"hq_imperial_a" bt=dt+"proving_grounds"
+ct=dt+"kingdom_outpost_b" dt+="kingdom_outpost_b_2" t=999999 :T=at
+ad=1000 bd="\nX:" cd="\nY:" dd="\nZ:" ed="\nS:"
+:T=bt a=t-:A a*=a ar=(a-la)/5 arr=(ar-lar)/5 la=a lar=ar ga++ goto11
+:T=ct b=t-:A b*=b br=(b-lb)/5 brr=(br-lbr)/5 lb=b lbr=br ga++ goto11
+:T=dt c=t-:A c*=c cr=(c-lc)/5 crr=(cr-lcr)/5 lc=c lcr=cr ga++ goto11
+:T=at d=t-:A d*=d dr=(d-ld)/5 drr=(dr-ldr)/5 ld=d ldr=dr ga=7 goto11
+XX=a/e+b/f+c/g+d/h-i YY=a/j+b/k+c/l+d/m-n ZZ=a/o+b/p+c/q+d/r-s gotogb
+x+=XX y+=YY z+=ZZ gb+=(ii++>3) ii*=ii<4 :I++ goto14
+SS=sqrt((x-u)^2+(y-v)^2+(z-w)^2)/12 gb=12 u=x v=y w=z x=0 y=0 z=0 :I++   //div = 5[lines total loop] * 0.2[ticks>seconds] * 3[samples] * 4[samples+1(a half loop)] * 
+:ISAN=bd+XX/ad*ad+cd+YY/ad*ad+dd+ZZ/ad*ad+ed+SS/ad*ad
+ar+=arr br+=brr cr+=crr dr+=drr a+=ar b+=br c+=cr d+=dr gotoga
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|

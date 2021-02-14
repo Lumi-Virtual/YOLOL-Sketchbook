@@ -178,27 +178,27 @@ m //
 n // step counter
 opq //* dest alt
 rst //* ship alt
-uvw //* dest
+uvw //* destÍ
 xyz //* ship
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 goto1+:Autopilot
-:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0 test=50
 //--+----| Wait til full speed
-goto3+sqrt((:I-:X)^2+(:J-:Y)^2+(:K-:Z)^2) //+ check if we go about the same speed next tick
-//--+----| Get last, ship, and dest vectors. Then normalize them
+test++ goto3+test<0 // sqrt((:I-:X)^2+(:J-:Y)^2+(:K-:Z)^2) //+ check if we go about the same speed next tick
+//--+----| Get last, ship, and dest vectors, then normalize them
 i=x j=y k=z
 x=:I-:X y=:J-:Y z=:K-:Z m=sqrt(x^2+y^2+z^2) x/=m y/=m z/=m
 u=:X-:DX v=:DY-:Y w=:DZ-:Z n=sqrt(u^2+v^2+w^2) u/=n v/=n w/=n
 //--+----| Antialign ship and dest to a plane tangent to last
 r=i*x+j*y+j*z s=k*x+j*y-i*z t=k*y+k*z-j*x
 o=i*u+j*v+j*w p=k*u+j*v-i*w q=k*v+k*w-j*u
-//--+----| Get the on plane angle between ship and dest
-e=atan(o/q)-atan(r/t)+((o>0)*(q<0-0.5)-(r>0)*(t<0-0.5))*360
 //--+----| Get the angle difference between last to ship and last to dest
 e=sqrt(r^2+t^2) f=sqrt(o^2+q^2) f=atan(f/p)+180+(p>0)*((f<0)-0.5)*360
 f/=atan(e/s)+180+(s>0)*((e<0)-0.5)*360
 //--+----| Correct multipliers
-:APP*=f*(g>0) :APN*=f*(g<0) :AYP*=f*(h>0) :AYN*=f*(h<0)
+:APP=(g>0)*(:APP*f-:APP) :APN=(g<0)*(:APN*f-:APN) :AYP=(g>0)*(:AYP*f-:AYP) :AYN=(g>0)*(:AYN*f-:AYN)
+//--+----| Get the on plane angle between ship and dest
+e=atan(o/q)-atan(r/t)+((o>0)*(q<0-0.5)-(r>0)*(t<0-0.5))*360
 //--+----| Rotate dest around ship by the ammount we were off by last move
 i=cos e j=sin e k=1-cos e
 o=(i+x^2*k)*u+(x*y*k-z*j)*v+(x*z*k+y*j)*w
@@ -213,11 +213,84 @@ g=:P-:DP h=(:H-:DH+180)%360-180
 //--+----| Then to total steps
 g*=:APP*(g>0)+:APN*(g<0) h*=:AYP*(h>0)+:AYN*(h<0)
 //--+----| Then to duration
-n=((g+(h-g)*(h>g))/100+0.999)/1000*1000 //~ approaches instead of actually gets to dest
+n=((g+(h-g)*(h>g))/100+0.999)/1000*1000 //~ make it approach instead of actually geting to dest
 //--+----| And step size
 g/=n h/=n
 //--+----| Piloting loop
 :FcuRotationalPitch=g :FcuRotationalYaw=h n-- goto#+n<1
 //--+----| Wait til we stop rotating
-goto ()*#
+//goto ()*# // we actually do this at the top instead i guess
+goto0
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+
+
+// ehhhhh
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0 test=50
+test++ goto3+test<0
+i=x j=y k=z x=:I-:X y=:J-:Y z=:K-:Z m=sqrt(x^2+y^2+z^2) x/=m y/=m z/=m
+u=:X-:DX v=:DY-:Y w=:DZ-:Z n=sqrt(u^2+v^2+w^2) u/=n v/=n w/=n r=i*x
+r+=j*y+j*z s=k*x+j*y-i*z t=k*y+k*z-j*x o=i*u+j*v+j*w p=k*u+j*v-i*w
+q=k*v+k*w-j*u e=sqrt(r^2+t^2) f=sqrt(o^2+q^2) f=atan(f/p)+180
+f+=(p>0)*((f<0)-0.5)*360 f/=atan(e/s)+180+(s>0)*((e<0)-0.5)*360
+:APP*=f*(g>0) :APN*=f*(g<0) :AYP*=f*(h>0) :AYN*=f*(h<0) e=atan(o/q)
+e-=atan(r/t)+((o>0)*(q<0-0.5)-(r>0)*(t<0-0.5))*360 i=cos e j=sin e
+k=1-cos e o=(i+x^2*k)*u+(x*y*k-z*j)*v+(x*z*k+y*j)*w p=(x*y*k+z*j)*u
+p+=(i+y^2*k)*v+(y*z*k-x*j)*w q=(z*x*k-y*j)*u+(z*y*k+x*j)*v+(i+z^2*k)*w
+e=sqrt(x^2+y^2) :P=atan(z/e) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360
+x=x-o y=p-y z=q-z e=sqrt(x^2+y^2) :DD=sqrt(x^2+y^2+z^2) :DP=atan(z/e)
+:DH=atan(x/y)+180+(y>0)*((x<0)-0.5)*360 g=:P-:DP h=(:H-:DH+180)%360
+h-=180 g*=:APP*(g>0)+:APN*(g<0) h*=:AYP*(h>0)+:AYN*(h<0)
+n=((g+(h-g)*(h>g))/100+0.999)/1000*1000 g/=n h/=n
+:FcuRotationalPitch=g :FcuRotationalYaw=h n-- goto18+n<1
+goto1
+
+
+
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+goto1+:Autopilot
+:FcuForward=100 :FcuRotationalPitch=0 :FcuRotationalYaw=0 test=50
+test-- goto3+test<0
+i=x j=y k=z x=:I-:X y=:J-:Y z=:K-:Z m=sqrt(x^2+y^2+z^2) x/=m y/=m z/=m
+u=:X-:DX v=:DY-:Y w=:DZ-:Z n=sqrt(u^2+v^2+w^2) u/=n v/=n w/=n r=i*x
+r+=j*y+j*z s=k*x+j*y-i*z t=k*y+k*z-j*x o=i*u+j*v+j*w p=k*u+j*v-i*w
+q=k*v+k*w-j*u e=sqrt(r^2+t^2) f=sqrt(o^2+q^2) f=atan(f/p)+180
+f+=(p>0)*((f<0)-0.5)*360 f/=atan(e/s)+180+(s>0)*((e<0)-0.5)*360
+:APP+=(g>0)*(:APP*f-:APP) :APN+=(g<0)*(:APN*f-:APN)
+:AYP+=(h>0)*(:AYP*f-:AYP) :AYN+=(h<0)*(:AYN*f-:AYN) e=atan(o/q)
+e-=atan(r/t)+((o>0)*(q<0-0.5)-(r>0)*(t<0-0.5))*360 i=cos e j=sin e
+k=1-cos e o=(i+x^2*k)*u+(x*y*k-z*j)*v+(x*z*k+y*j)*w p=(x*y*k+z*j)*u
+p+=(i+y^2*k)*v+(y*z*k-x*j)*w q=(z*x*k-y*j)*u+(z*y*k+x*j)*v+(i+z^2*k)*w
+e=sqrt(x^2+y^2) :P=atan(z/e) :H=atan(x/y)+180+(y>0)*((x<0)-0.5)*360
+x=x-o y=p-y z=q-z e=sqrt(x^2+y^2) :DD=sqrt(x^2+y^2+z^2) :DP=atan(z/e)
+:DH=atan(x/y)+180+(y>0)*((x<0)-0.5)*360 g=:P-:DP h=(:H-:DH+180)%360
+g-=180 g*=:APP*(g>0)+:APN*(g<0) h*=:AYP*(h>0)+:AYN*(h<0)
+n=((g+(h-g)*(h>g))/100+0.999)/1000*1000 g/=n h/=n
+:FcuRotationalPitch=g :FcuRotationalYaw=h n-- goto19+n<1
+goto0
+
+
+
+
+
+
+// idk what this actually does
+//--+----|----+----|----+----|----+----|----+----|----+----|----+----|
+x=0 y=0 z=0 i=5 div=0
+x-=:X y-=:Y z-=:Z div++ goto 2+(i--==0)
+j=10 i=5 m=:DX-x/5 n=:DY-y/5 o=:DZ-z/5
+goto 4+(j--==0)
+x+=:X y+=:Y z+=:Z goto 5+(i--==0)
+v=sqrt(x^2+y^2+z^2) x/=v y/=v z/=v v=sqrt(m^2+n^2+o^2) m/=v n/=v o/=v
+a=-x*z b=-y*z c=x^2+y^2            v=sqrt(a^2+b^2+c^2) a/=v b/=v c/=v
+c=cos(r) s=sin(r) m=1-c at=(c+x*x*m)*a+(x*y*m-z*s)*b+(x*z*m+y*s)*c
+bt=(y*x*m+z*s)*a+(c+y*y*m)*b+(y*z*m-x*s)*c
+ct=(z*x*m-y*s)*a+(z*y*m+x*s)*b+(c+z*z*m)*c a=at b=bt c=ct
+u=((z*a-x*c)*c-b*(x*b-y*a))*m+(a*(x*b-y*a)-(y*c-z*b)*c)*n
+v=(b*z-y*c)*m+(x*c-a*z)*n+(a*y-x*b)*o 
+w=(y*(x*b-y*a)-(z*a-x*c)*z)*m+((y*c-z*b)*z-x*(x*b-y*a))*n
+w+=(x*(z*a-x*c)-(y*c-z*b)*y)*o u+=((y*c-z*b)*b-a*(z*a-x*c))*o
+du=u-lu dv=v-lv dw=w-lw err=180-atan(dv/dw)-(dw<0)*360 lu=u lv=v lw=w
+r-=err-(ly<0)*180-(lp>0)*90+(lp<0)*90 i=10 ly=0 lp=0 j=10
+if v>w then ly=i-2*i*(v<0) :yaw=ly else lp=i-2*i*(w<0) :pitch=lp end
+goto 4+(j--==0)
