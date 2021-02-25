@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// String Sound Player
+// Sound String Player
 // 2a.0.0
 // BSC2-10
 // 
@@ -7,9 +7,13 @@
 // 
 // 
 // 
-// Requires one audio signal device, with these field names:
-//  SoundOn -> :AO
-//  SoundType -> :AT
+// Requires two audio signal devices, with these field names:
+//  First
+//   SoundOn -> AO
+//   SoundType -> AT
+//  Second
+//   SoundOn -> AP
+//   SoundType -> AU
 // 
 // Requries these external memory fields:
 //  :SSP0     // 1 = Reset. 2 = Pause. 3 = Play. Set to 4 for a tick
@@ -100,18 +104,20 @@
 t=:ATrack v="`" w="n" x=81 y=-1 :AM=y :AZ=0 :SSP0=2
 goto:SSP0
 s=:AZ k=t :AS=k-t-- :AM+=(s>v)*(s<w)*x :AO=:AN>y :AT=:AN :AN=y z=:SSP0
-s=:AS k=t :AZ=k-t-- :AN+=(s>v)*(s<w)*x :AO=:AM>y :AT=:AM :AM=y gotoz
-:SSP0=4 goto1
+s=:AS k=t :AZ=k-t-- :AN+=(s>v)*(s<w)*x :AP=:AM>y :AU=:AM :AM=y gotoz
+:SSP0=5 goto1
 //--+-Bsc|2---+----|----+----|----+----|----+----|----+----|----+----|
 a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i" j="j"
 k="k" l="l" m="m" goto:SSP0
 s=:AZ :AM+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m z=:SSP0
 s=:AS :AN+=s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i+s>j+s>k+s>l+s>m gotoz
+goto2
 //--+-Bsc|3---+----|----+----|----+----|----+----|----+----|----+----|
 a="a" b="b" c="c" d="d" e="e" f="f" g="g" h="h" i="i"
 v="group low edge" w="group high edge" x=#groupOffset goto:SSP0
 s=:AZ :AM+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i z=:SSP0
 s=:AS :AN+=(s>v)*(s<w)*x+s>a+s>b+s>c+s>d+s>e+s>f+s>g+s>h+s>i gotoz
+goto2
 //--+----|----+----|----+----|----+----|----+----|----+----|----+----|
 
 
